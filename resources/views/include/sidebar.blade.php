@@ -25,7 +25,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
        
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="/" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -75,7 +75,7 @@
               Kandang 
               </p>
             </a>
-          </li>
+          </li> --}}
          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class=" nav-icon fa-solid fa-door-closed"></i>
@@ -100,11 +100,19 @@
             </ul>
           </li>-->
          
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ url('zona') }}" class="nav-link">
               <i class="nav-icon fa-solid fa-location-dot"> </i>
               <p>
                 Zona 
+              </p>
+            </a>
+          </li> --}}
+          <li class="nav-item">
+            <a href="{{ url('menu') }}" class="nav-link">
+              <i class="nav-icon fa-solid fa-location-dot"> </i>
+              <p>
+                Menu 
               </p>
             </a>
           </li>
@@ -128,14 +136,14 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="/users" class="nav-link">
               <i class=" nav-icon fa-solid fa-users"></i>
               <p>
                 Pengguna 
               </p>
             </a>
-          </li>
+          </li>  --}}
           <!--<li class="nav-item">
             <a href="index.html" class="nav-link">
               <i class=" nav-icon fa-solid fa-gear"></i>

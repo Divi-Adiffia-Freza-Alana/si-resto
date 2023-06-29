@@ -231,6 +231,20 @@
 
   });
 
+  var tablemenu = $('#data-tables-menu').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth: true,
+      ajax: "{{ route('menu.index') }}",
+      columns: [ 
+          {data: 'nama', name: 'nama'},
+          {data: 'harga', name: 'harga'},
+          {data: 'jenis', name: 'jenis'},
+          {data: 'action', name: 'action', orderable: false, searchable: false},
+      ]
+
+  });
+
 
 
     

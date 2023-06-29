@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SatwaController;
-use App\Http\Controllers\KeeperController;
-use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\KandangController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ZonaController;
+use App\Http\Controllers\SatwaController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\KeeperController;
+use App\Http\Controllers\KandangController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -100,3 +101,9 @@ Route::get('/kandang-delete/{id}', [KandangController::class, 'delete']);
 Route::any('/selectkeeper', [KandangController::class, 'selectKeeper']);
 Route::any('/selectzona', [KandangController::class, 'selectZona']);
 
+// Route Menu
+Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+Route::any('/menustore', [MenuController::class, 'store']);
+Route::get('/menu-add', [MenuController::class, 'add']);
+Route::any('/menu-edit/{id}', [MenuController::class, 'edit']);
+Route::any('/menu-delete/{id}', [MenuController::class, 'delete']);
