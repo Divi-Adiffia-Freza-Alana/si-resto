@@ -4,8 +4,8 @@
       <img src="{{asset('/')}}img/logowhite.png" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
       <div style="color:#fff;font-size:16px;font-weight:700;" class="text-center font-weight-light white">Admin</div>
     </a>-->
-    <div style="display: flex; justify-content: center;"><img src="{{asset('/')}}img/logowhite.png" width="100px" height="100%" ></img></div>
-    <div style="color:#fff;font-size:16px;font-weight:700;" class="text-center font-weight-light white"><b>Admin</b></div>
+    <div style="display: flex; justify-content: center;"><img src="{{asset('/')}}img/sagalaraos.png" width="100px" height="100%" ></img></div>
+    <!--    <div style="color:#fff;font-size:16px;font-weight:700;" class="text-center font-weight-light white"><b>Admin</b></div>-->
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -133,6 +133,31 @@
               <i class=" nav-icon fa-solid fa-users"></i>
               <p>
                 Pengguna 
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/menu" class="nav-link">
+              <i class="nav-icon fa-solid fa-utensils"></i>
+              <p>
+                Menu 
+              </p>
+            </a>
+          </li>
+         
+          <li class="nav-item">
+            <a href="/bahanbaku" class="nav-link">
+              <i class="nav-icon fa-solid fa-bowl-food"></i>
+              <p>
+                Bahan Baku 
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/kurir" class="nav-link">
+              <i class=" nav-icon fa-solid fa-users"></i>
+              <p>
+                Kurir 
               </p>
             </a>
           </li>

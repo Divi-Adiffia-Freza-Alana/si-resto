@@ -8,7 +8,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KandangController;
 use App\Http\Controllers\ZonaController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\BahanBakuController;
+use App\Http\Controllers\kurirController;
+use App\Http\Controllers\MenuController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -100,3 +102,33 @@ Route::get('/kandang-delete/{id}', [KandangController::class, 'delete']);
 Route::any('/selectkeeper', [KandangController::class, 'selectKeeper']);
 Route::any('/selectzona', [KandangController::class, 'selectZona']);
 
+
+//Route Kurir
+Route::get('/kurir', [kurirController::class, 'index'])->name('kurir.index');
+Route::any('/kurirstore', [kurirController::class, 'store']);
+Route::get('/kurir-add', [kurirController::class, 'add']);
+Route::any('/kurir-edit/{id}', [kurirController::class, 'edit']);
+Route::any('/kurir-delete/{id}', [kurirController::class, 'delete']);
+
+
+
+//Route Bahan Baku
+Route::get('/bahanbaku', [BahanBakuController::class, 'index'])->name('bahanbaku.index');
+Route::any('/bahanbakustore', [BahanBakuController::class, 'store']);
+Route::get('/bahanbaku-add', [BahanBakuController::class, 'add']);
+Route::any('/bahanbaku-edit/{id}', [BahanBakuController::class, 'edit']);
+Route::any('/bahanbaku-delete/{id}', [BahanBakuController::class, 'delete']);
+Route::any('/bahanbaku-transaction/{id}', [BahanBakuController::class, 'transaksi']);
+Route::any('/bahanbakustoretransaction', [BahanBakuController::class, 'storetransaction']);
+Route::get('/transaksibahanbaku/{id}', [BahanBakuController::class, 'indextransactionbahanbaku'])->name('transaksibahanbaku.index/{id}');
+
+
+
+
+
+//Route Menu
+Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+Route::any('/menustore', [MenuController::class, 'store']);
+Route::get('/menu-add', [MenuController::class, 'add']);
+Route::any('/menu-edit/{id}', [MenuController::class, 'edit']);
+Route::any('/menu-delete/{id}', [MenuController::class, 'delete']);

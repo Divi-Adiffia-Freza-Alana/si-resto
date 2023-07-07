@@ -29,12 +29,28 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3><?= $satwa?></h3>
+                <h3><?= $menu?></h3>
 
-                <p>Satwa</p>
+                <p>Menu</p>
               </div>
               <div class="icon">
-                <i style="color:#ffff;" class="fa-solid fa-paw"></i>
+                <i style="color:#ffff;" class="fa-solid fa-utensils"></i>
+              </div>
+              <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
+              <br>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+              <h3><?= $bahanbaku?></h3>
+
+                <p>Bahan Baku</p>
+              </div>
+              <div class="icon">
+                <i style="color:#ffff;" class="fa-solid fa-bowl-food"></i>
               </div>
               <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
               <br>
@@ -45,9 +61,9 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?= $keeper?><sup style="font-size: 20px"></sup></h3>
+                <h3><?= $kurir?><sup style="font-size: 20px"></sup></h3>
 
-                <p>Keeper</p>
+                <p>Kurir</p>
               </div>
               <div class="icon">
                 
@@ -58,32 +74,17 @@
             </div>
           </div>
           <!-- ./col -->
+
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-primary">
               <div class="inner">
-              <h3><?= $kandang?></h3>
+              <h3>0</h3>
 
-                <p>Kandang</p>
+                <p>Transaksi</p>
               </div>
               <div class="icon">
-                <i style="color:#ffff;" class="fa-solid fa-door-closed"></i>
-              </div>
-              <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
-              <br>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-              <h3><?= $kandang?></h3>
-
-                <p>Kematian Satwa</p>
-              </div>
-              <div class="icon">
-              <i style="color:#ffff;" class="fa-solid fa-flag"></i>
+              <i style="color:#ffff;" class="fa-solid fa-cart-shopping"></i>
               </div>
               <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
               <br>
@@ -101,7 +102,7 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="fas fa-chart-pie mr-1"></i>
-                  Dinamika Populasi
+                  Dinamika Transaksi
                 </h3>
                 <div class="card-tools">
                   <ul class="nav nav-pills ml-auto">

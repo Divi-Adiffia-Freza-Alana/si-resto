@@ -143,6 +143,75 @@
 
   });
 
+      
+  var table = $('#data-tables-kurir').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth: true,
+      ajax: "{{ route('kurir.index') }}",
+      columns: [ 
+          {data: 'nama', name: 'nama'},
+          {data: 'no_ktp', name: 'no_ktp'},
+          {data: 'tgl_lahir', name: 'tgl_lahir'},
+          {data: 'no_hp', name: 'no_hp'},
+          {data: 'email', name: 'email'},
+          {data: 'jk', name: 'jk'},
+          {data: 'alamat', name: 'alamat'},
+          {data: 'action', name: 'action', orderable: false, searchable: false},
+      ]
+
+  });
+
+
+  var table = $('#data-tables-bahanbaku').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth: true,
+      ajax: "{{ route('bahanbaku.index') }}",
+      columns: [ 
+          {data: 'nama', name: 'nama'},
+          {data: 'stok', name: 'stok'},
+          {data: 'satuan', name: 'satuan'},
+          {data: 'manajemenstok', name: 'manajemenstok', orderable: false, searchable: false},
+          {data: 'log', name: 'log', orderable: false, searchable: false},
+          {data: 'action', name: 'action', orderable: false, searchable: false},
+      ]
+
+  });
+
+
+  var table = $('#data-tables-transaksibahanbaku').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth: true,
+      ajax: "{{ route('transaksibahanbaku.index/{id}') }}",
+      columns: [ 
+          {data: 'bahanbaku.nama', name: 'bahanbaku.nama'},
+          {data: 'stok_awal', name: 'stok_awal'},
+          {data: 'stok_terpakai', name: 'stok_terpakai'},
+          {data: 'sisa', name: 'sisa'},
+          {data: 'bahanbaku.satuan', name: 'bahanbaku.satuan'},
+      ]
+
+  });
+
+
+  var table = $('#data-tables-menu').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth: true,
+      ajax: "{{ route('menu.index') }}",
+      columns: [ 
+          {data: 'nama', name: 'nama'},
+          {data: 'jenis', name: 'jenis'},
+          {data: 'komposisi', name: 'komposisi'},
+          {data: 'deskripsi', name: 'deskripsi'},
+
+          {data: 'action', name: 'action', orderable: false, searchable: false},
+      ]
+
+  });
+
   var tables = $('#data-tables').DataTable({
       processing: true,
       serverSide: true,
