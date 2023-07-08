@@ -173,27 +173,14 @@
           {data: 'stok', name: 'stok'},
           {data: 'satuan', name: 'satuan'},
           {data: 'manajemenstok', name: 'manajemenstok', orderable: false, searchable: false},
-          {data: 'log', name: 'log', orderable: false, searchable: false},
+         // {data: 'log', name: 'log', orderable: false, searchable: false},
           {data: 'action', name: 'action', orderable: false, searchable: false},
       ]
 
   });
 
 
-  var table = $('#data-tables-transaksibahanbaku').DataTable({
-      processing: true,
-      serverSide: true,
-      autoWidth: true,
-      ajax: "{{ route('transaksibahanbaku.index/{id}') }}",
-      columns: [ 
-          {data: 'bahanbaku.nama', name: 'bahanbaku.nama'},
-          {data: 'stok_awal', name: 'stok_awal'},
-          {data: 'stok_terpakai', name: 'stok_terpakai'},
-          {data: 'sisa', name: 'sisa'},
-          {data: 'bahanbaku.satuan', name: 'bahanbaku.satuan'},
-      ]
 
-  });
 
 
   var table = $('#data-tables-menu').DataTable({

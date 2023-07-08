@@ -38,10 +38,10 @@ class BahanBakuController extends Controller
                            $btn = '<a class="btn btn-primary" href="/bahanbaku-transaction/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>';
                             return $btn;
                     })
-                    ->addColumn('log', function($row){
+                    /*->addColumn('log', function($row){
                         $btn = '<a class="btn btn-primary" href="/transaksibahanbaku/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>';
                          return $btn;
-                 })
+                 })*/
                     ->addColumn('action', function($row){
                         $btn = '<a class="btn btn-primary" href="/bahanbaku-edit/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>
                                 <a class="btn btn-danger" href="/bahanbaku-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
@@ -54,7 +54,7 @@ class BahanBakuController extends Controller
 
     }
 
-    public function indextransactionbahanbaku(Request $request,$id){
+   /* public function indextransactionbahanbaku(Request $request,$id){
 
         //dd(Keeper::with(['keeperfoto']));
 
@@ -69,21 +69,12 @@ class BahanBakuController extends Controller
                     ->editColumn('bahanbaku.satuan', function($data){ 
                         return $data->bahanbaku->satuan;
                     })
-                    /*->addColumn('manajemenstok', function($row){
-                           $btn = '<a class="btn btn-primary" href="/bahanbaku-transaction/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>';
-                            return $btn;
-                    })
-                    ->addColumn('action', function($row){
-                        $btn = '<a class="btn btn-primary" href="/bahanbaku-edit/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>
-                                <a class="btn btn-danger" href="/bahanbaku-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
-                         return $btn;
-                 })
-                    ->rawColumns(['manajemenstok','action'])*/
+                   
                     ->make(true);
         }
         return view('bahanbaku.transaksibahanbaku');
 
-    }
+    }*/
 
     public function add(){
 

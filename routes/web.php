@@ -120,7 +120,7 @@ Route::any('/bahanbaku-edit/{id}', [BahanBakuController::class, 'edit']);
 Route::any('/bahanbaku-delete/{id}', [BahanBakuController::class, 'delete']);
 Route::any('/bahanbaku-transaction/{id}', [BahanBakuController::class, 'transaksi']);
 Route::any('/bahanbakustoretransaction', [BahanBakuController::class, 'storetransaction']);
-Route::get('/transaksibahanbaku/{id}', [BahanBakuController::class, 'indextransactionbahanbaku'])->name('transaksibahanbaku.index/{id}');
+//SRoute::get('/transaksibahanbaku/{id}', [BahanBakuController::class, 'indextransactionbahanbaku'])->name('transaksibahanbaku.index/{id}');
 
 
 

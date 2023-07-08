@@ -52,7 +52,7 @@
                     <th>Satuan</th>
                    <!--<th>Foto</th>-->
                     <th>Manajemen Stok</th> 
-                    <th>Log</th> 
+                   <!-- <th>Log</th> -->
                     <th>Action</th>
                   </tr>
                   </thead>

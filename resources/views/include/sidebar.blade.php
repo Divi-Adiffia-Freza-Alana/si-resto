@@ -33,7 +33,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a href="#" class="nav-link">
               <i class=" nav-icon fa-solid fa-paw"></i>
               <p>
@@ -75,7 +75,7 @@
               Kandang 
               </p>
             </a>
-          </li>
+          </li>-->
          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class=" nav-icon fa-solid fa-door-closed"></i>
@@ -100,14 +100,14 @@
             </ul>
           </li>-->
          
-          <li class="nav-item">
+         <!-- <li class="nav-item">
             <a href="{{ url('zona') }}" class="nav-link">
               <i class="nav-icon fa-solid fa-location-dot"> </i>
               <p>
                 Zona 
               </p>
             </a>
-          </li>
+          </li>-->
         
 
           <!--@hasrole('super-admin')
@@ -120,22 +120,15 @@
             </a>
           </li>
           @endhasrole-->
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a href="{{ url('keeper') }}" class="nav-link">
               <i class="nav-icon fa-solid fa-user"></i>
               <p>
                 Keeper 
               </p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="/users" class="nav-link">
-              <i class=" nav-icon fa-solid fa-users"></i>
-              <p>
-                Pengguna 
-              </p>
-            </a>
-          </li>
+          </li>-->
+
           <li class="nav-item">
             <a href="/menu" class="nav-link">
               <i class="nav-icon fa-solid fa-utensils"></i>
@@ -169,6 +162,14 @@
               </p>
             </a>
           </li>-->
+          <li class="nav-item">
+            <a href="/users" class="nav-link">
+              <i class=" nav-icon fa-solid fa-users"></i>
+              <p>
+                Pengguna 
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="/logout" class="nav-link"> 
               <i class="nav-icon fa-solid fa-right-from-bracket"></i>

@@ -46,6 +46,17 @@
                       <label for="exampleInputEmail1">Password </label>
                       <input type="password" class="form-control" id="password" name="password" placeholder="password" placeholder="Password" value="<?php echo(isset($data->password)?$data->password:"");?>">
                     </div>
+                    <div class="col-md-6">
+                      <!-- select -->
+                      <div class="form-group">
+                        <label>Role</label>
+                        <select id="role" name="role" class="form-control" required>
+                        <option <?php echo (isset($data->role)&&$data->role=="superadmin"?"selected":""); ?> value="superadmin">Superadmin</option>
+                        <option <?php echo (isset($data->role)&&$data->role=="kurir"?"selected":""); ?> value="kurir">Kurir</option>
+                        <option <?php echo (isset($data->role)&&$data->role=="pelanggan"?"selected":""); ?> value="pelanggan">Pelanggan</option>
+                        </select>
+                      </div>
+                    </div>
                     <!--<div class="col-md-4">
                       select
                       <div class="form-group">

@@ -74,7 +74,7 @@ class UsersController extends Controller
 
     if($request->id == NULL || $request->id == "" ){
 
-
+        //dd($request->all());
        $user = User::create([
         'id' => Str::uuid(),
         'name' => $request->name,
@@ -83,9 +83,7 @@ class UsersController extends Controller
 
     ]); 
         //$user->id;
-        $user->assignRole('superadmin');
-
-             }
+        $user->assignRole($request->role);}
     else{
       
         User::updateOrCreate(
