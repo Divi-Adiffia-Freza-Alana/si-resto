@@ -1,4 +1,6 @@
-@extends('include.master')
+
+@extends('keranjang.layout')
+
 @section('content')
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -25,6 +27,7 @@
       </div><!-- /.container-fluid -->
     </section>
     
+
 
     <!-- Main content -->
     <section class="content">

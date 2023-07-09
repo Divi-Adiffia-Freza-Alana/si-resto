@@ -70,8 +70,8 @@ Route::any('/menu-delete/{id}', [MenuController::class, 'delete']);
 
 //Keranjang 
 Route::get('/produk', [KeranjangController::class, 'index']);
-Route::get('/cart', [KeranjangControllerr::class, 'cart']);
+Route::get('/cart', [KeranjangController::class, 'cart'])->name('keranjang.cart');
 Route::get('/add-to-cart/{id}', [KeranjangController::class, 'addToCart']);
 Route::patch('/update-cart', [KeranjangController::class, 'update']);
-Route::delete('/remove-from-cart', [KeranjangController::class, 'remove']);
+Route::delete('remove-from-cart', [KeranjangController::class, 'remove']);
 

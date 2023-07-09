@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('keranjang.layout')
 
 @section('title', 'Cart')
 
@@ -81,7 +81,7 @@
             });
         });
 
-        $(".remove-from-cart").click(function (e) {
+       $(".remove-from-cart").click(function (e) {
             e.preventDefault();
 
             var ele = $(this);
