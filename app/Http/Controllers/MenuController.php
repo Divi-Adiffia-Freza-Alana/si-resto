@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
+use App\Models\Keeper;
+use App\Models\Keeper_foto;
 use Illuminate\Http\RedirectResponse;
+
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -63,53 +66,43 @@ class MenuController extends Controller
 
     
 
-    public function store(Request $request): RedirectResponse
+   public function store(Request $request): RedirectResponse
+{   
+    $validator = Validator::make($request->all(), [
+        'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+
+    if ($validator->fails()) {
+        Session::flash('status', 'error');
+        Session::flash('message', $validator->messages()->first());
+        return redirect()->back()->withInput();
+    } else {
+        if ($request->id == NULL || $request->id == "") {
+            $menu = Menu::create([
+                'id' => Str::uuid(),
+                'nama' => $request->nama,
+                'jenis' => $request->jenis,
+                'komposisi' => $request->komposisi,
+                'deskripsi' => $request->deskripsi,
+            ]);
+
+            if ($request->file('foto')) {
+                $extension = $request->file('foto')->getClientOriginalExtension();
+                $namefile = $request->nama . '-' . now()->timestamp . '.' . $extension;
+                $request->file('foto')->move('foto', $namefile);
+
+                Keeper_foto::create([
+                    'id' => Str::uuid(),
+                    'id_keeper' => $menu->id, // Assuming $menu object is available and has the necessary id
+                    'nama' => $namefile,
+                    'url' => urlimage($namefile),
+                ]);
+
+                Session::flash('status', 'success');
+                Session::flash('message', 'Tambah Data Menu Berhasil');
+            }
+        }
     
-    {   
-
-
-        $validator =  Validator::make($request->all(), [
-            'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
-            
-        ]);
-    
-        if ($validator->fails()) {
-
-            Session::flash('status', 'error');
-            Session::flash('message',  $validator->messages()->first());
-            return redirect()->back()->withInput();
-
-        } else {
- 
-            if($request->id == NULL || $request->id == "" ){
-
-               // dd($request->All());
-                
-                $menu = Menu::create([
-                     'id' => Str::uuid(),
-                     'nama' => $request->nama,
-                     'jenis' => $request->jenis,
-                     'komposisi' => $request->komposisi,
-                     'deskripsi' => $request->deskripsi,
-
-                 ]); 
-                 
-                 if ($request->file('foto')){
-                     $extension = $request->file('foto')->getClientOriginalExtension();
-                     $namefile = $request->nama.'-'.now()->timestamp.'.'.$extension;
-                     $request->file('foto')->move('foto', $namefile);
-                     Keeper_foto::create([
-                         'id' => Str::uuid(),
-                         'id_keeper' => $keeper->id,
-                         'nama' => $namefile,
-                         'url' => urlimage($namefile) 
- 
-                     ]);
-                 }
-             
-                 Session::flash('status', 'success');
-                 Session::flash('message', 'Tambah Data Menu Berhasil');
-              }
      else{
         //dd($namefile);
          Menu::updateOrCreate(
@@ -173,15 +166,23 @@ class MenuController extends Controller
 
     public function delete($id){
 
-        $deleteKeeper = Keeper::findorFail($id);
-        $deleteKeeper->delete();
+        // $deleteKeeper = Keeper::findorFail($id);
+        // $deleteKeeper->delete();
 
-        /*$deleteKeeperfoto = Keeper_foto::findorFail($id);
-        $deleteKeeperfoto->delete();*/
-        Session::flash('status', 'success');
-        Session::flash('message', 'Delete Data Keeper Berhasil');
+        // /*$deleteKeeperfoto = Keeper_foto::findorFail($id);
+        // $deleteKeeperfoto->delete();*/
+        // Session::flash('status', 'success');
+        // Session::flash('message', 'Delete Data Keeper Berhasil');
 
-        return redirect('/keeper');
+        // return redirect('/keeper');
 
-    }
+    $menu = Menu::findOrFail($id);
+    $menu->delete();
+
+    Session::flash('status', 'success');
+    Session::flash('message', 'Delete Data Menu Berhasil');
+
+    return redirect('/menu');
+}
+    
 }

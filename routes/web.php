@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\kurirController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\KeranjangController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -132,3 +133,12 @@ Route::any('/menustore', [MenuController::class, 'store']);
 Route::get('/menu-add', [MenuController::class, 'add']);
 Route::any('/menu-edit/{id}', [MenuController::class, 'edit']);
 Route::any('/menu-delete/{id}', [MenuController::class, 'delete']);
+
+
+//Keranjang 
+Route::get('/produk', [KeranjangController::class, 'index']);
+Route::get('/cart', [KeranjangControllerr::class, 'cart']);
+Route::get('/add-to-cart/{id}', [KeranjangController::class, 'addToCart']);
+Route::patch('/update-cart', [KeranjangController::class, 'update']);
+Route::delete('/remove-from-cart', [KeranjangController::class, 'remove']);
+
