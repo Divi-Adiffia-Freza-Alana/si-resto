@@ -122,26 +122,6 @@
 
 <script>
   $(function () {
-    
-  var table = $('#data-table').DataTable({
-      processing: true,
-      serverSide: true,
-      autoWidth: true,
-      ajax: "{{ route('mastersatwa.index') }}",
-      columns: [ 
-          {data: 'namasatwa', name: 'namasatwa'},
-          {data: 'kingdom', name: 'kingdom'},
-          {data: 'filum', name: 'filum'},
-          {data: 'kelas', name: 'kelas'},
-          {data: 'ordo', name: 'ordo'},
-          {data: 'famili', name: 'famili'},
-          {data: 'subfamili', name: 'subfamili'},
-          {data: 'genus', name: 'genus'},
-          {data: 'spesies', name: 'spesies'},
-          {data: 'action', name: 'action', orderable: false, searchable: false},
-      ]
-
-  });
 
       
   var table = $('#data-tables-kurir').DataTable({
@@ -199,43 +179,10 @@
 
   });
 
-  var tables = $('#data-tables').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ route('keeper.index') }}",
-      columns: [
-          {data: 'nama', name: 'nama'},
-          {data: 'alamat', name: 'alamat'},
-          {data: 'tgl_lahir', name: 'tgl_lahir'},
-          {data: 'jk', name: 'jk'},
-          {data: 'telp', name: 'telp'},
-          {data: 'is_pic', name: 'is_pic'},
-        //  {data: 'keeperfoto.nama', name: 'keeperfoto.nama'},
-         // {data: 'keeper', name: 'keeper.nama'},
-          {data: 'action', name: 'action', orderable: false, searchable: false},
-          
-      ]
 
 
-  });
 
-
-  var tabless = $('#data-tablekandang').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ route('kandang.index') }}",
-      columns: [
-          {data: 'kode_kandang', name: 'kode_kandang'},
-          {data: 'jenis_kandang', name: 'jenis_kandang'},
-          {data: 'zona.nama', name: 'zona.nama'},
-          {data: 'deskripsi', name: 'deskripsi'},
-          {data: 'keeperKandang.nama', name: 'keeperKandang.nama'},
-          {data: 'action', name: 'action', orderable: false, searchable: false},
-      ]
-
-
-  });
-
+ 
   var tableuser = $('#data-tables-user').DataTable({
       processing: true,
       serverSide: true,
@@ -250,42 +197,8 @@
 
   });
 
-  var tablzona = $('#data-tables-zona').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ route('zona.index') }}",
-      columns: [
-          {data: 'nama', name: 'nama'},
-          {data: 'keterangan', name: 'keterangan'},
-          {data: 'action', name: 'action', orderable: false, searchable: false},
-          
-      ]
 
 
-  });
-
-
-  var tabelsatwa = $('#data-tables-satwa').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ route('satwa.index') }}",
-      columns: [
-          {data: 'nama', name: 'nama'},
-          {data: 'mastersatwa.namasatwa', name: 'mastersatwa.namasatwa'},
-          {data: 'filial', name: 'filial'},
-          {data: 'satwa_in.asal_usul', name: 'satwa_in.asal_usul'},
-          {data: 'satwa_in.nama_instansi', name: 'satwa_in.nama_instansi'},
-          {data: 'kandang', name: 'kandang[0].kode_kandang'},
-          {data: 'kandang1', name: 'kandang[1].kode_kandang'},
-          {data: 'kandangkeeper', name: 'kandang[0].kode_kandang'},
-          {data: 'detail', name: 'detail', orderable: false, searchable: false},
-          {data: 'action', name: 'action', orderable: false, searchable: false},
-
-          
-      ]
-
-
-  });
 
 
 
