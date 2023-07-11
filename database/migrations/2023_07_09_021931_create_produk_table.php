@@ -9,7 +9,7 @@ class CreateProdukTable extends Migration
     public function up(): void
     {
         Schema::create('produks', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->uuid('id_menu')->required();
             $table->foreign('id_menu')->references('id')->on('menu');
             $table->string('name');
