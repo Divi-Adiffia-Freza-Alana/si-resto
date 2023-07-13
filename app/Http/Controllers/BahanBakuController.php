@@ -78,8 +78,7 @@ class BahanBakuController extends Controller
 
     public function add(){
 
-        return view('bahanbaku.bahanbaku
-        ');
+        return view('bahanbaku.add_bahanbaku');
 
     }
 

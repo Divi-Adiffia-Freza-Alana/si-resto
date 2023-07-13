@@ -43,18 +43,17 @@
 
 
                     <div class="col-6">
-                      <img id="avatar" src="<?php echo (isset($data->keeperfoto[0]->url)?$data->keeperfoto[0]->url:""); ?>" class="avatar"> </img>
+                      <img id="avatar" src="<?php echo (isset($data->foto_url)?$data->foto_url:""); ?>" class="avatar"> </img>
                  
 
                     <div class="form-group" style="margin-top:25px;">
                    <!-- <label for="exampleInputFile">Foto</label>-->
                     <div class="input-group"  style="max-width:300px;margin:auto;">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="foto" name="foto" >
-                          <label class="custom-file-label" for="exampleInputFile"><?php echo (isset($data->keeperfoto[0]->nama)?$data->keeperfoto[0]->nama:"Choose File"); ?></label>
-                          <input type="hidden" id="fotolabel" name="fotolabel" value="<?php echo (isset($data->keeperfoto[0]->nama)?$data->keeperfoto[0]->nama:""); ?>">
-                          <input type="hidden" id="id_foto" name="id_foto" value="<?php echo (isset($data->keeperfoto[0]->id)?$data->keeperfoto[0]->id:""); ?>">
-                        </div>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="foto" name="foto" >
+                        <label class="custom-file-label" for="exampleInputFile"><?php echo (isset($data->foto)?$data->foto:"Choose File"); ?></label>
+                        <input type="hidden" id="fotolabel" name="fotolabel" value="<?php echo (isset($data->foto)?$data->foto:""); ?>">
+                      </div>
                         <!--<div class="input-group-append">
                           <span class="input-group-text">Upload</span>
                         </div>-->
@@ -75,6 +74,12 @@
                      <div class="form-group">
                       <label for="exampleInputEmail1">Email Kurir </label>
                       <input type="text" class="form-control" name="email" id="email" placeholder="Email Kurir" value="<?php echo (isset($data->alamat)?$data->alamat:""); ?>" required>
+                    </div>
+                    <div class="form-group">
+                      <label>User</label>
+                      <select id="selectuser" name="user" class="form-control" style="width: 100%;">
+                      <option value=<?php echo (isset($data->user[0]->id)?$data->user[0]->id:"")?> selected><?php echo (isset($data->user[0]->name)?$data->user[0]->name:"")?></option>
+                      </select>
                     </div>
   
                   </div>
@@ -106,6 +111,7 @@
                             </div>
                         </div>
                     </div>
+                    
                   </div>
                   
 

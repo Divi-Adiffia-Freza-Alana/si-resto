@@ -12,13 +12,19 @@ class Kurir extends Model
 
     protected $table = 'kurir';
     
-    protected $fillable = ['id','nama','no_ktp','tgl_lahir','no_hp','jk','email','alamat'];
+    protected $fillable = ['id','id_user','nama','no_ktp','tgl_lahir','no_hp','jk','email','alamat','foto','foto_url'];
 
     public function getIncrementing(){
         return false;
     }
     public function getKeyType(){
         return 'string';
+        
+    }
+
+    public function user()
+    {
+        return $this->hasMany(Users::Class, 'id', 'id_user');
     }
 
     /*public function keeperfoto()

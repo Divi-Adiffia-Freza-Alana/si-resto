@@ -17,6 +17,20 @@ class KurirController extends Controller
 {
     //
 
+    public function selectKurir (Request $request)
+    {
+        $kurir = [];
+        if($request->has('q')){
+            $search = $request->q;
+            $kurir =Kurir::select("id", "nama")
+                    ->where('nama', 'LIKE', "%$search%")
+                    ->get();
+        }else{ 
+            $kurir =Kurir::select("id", "nama")->orderBy('id')->get(10);
+        }
+        return response()->json($kurir);
+    }
+
     public function index(Request $request){
 
         //dd(Keeper::with(['keeperfoto']));
@@ -83,40 +97,48 @@ class KurirController extends Controller
             if($request->id == NULL || $request->id == "" ){
 
                // dd($request->All());
+               $namefile = '';
+               if($request->file('foto')) {
+                   $extension = $request->file('foto')->getClientOriginalExtension();
+                   $namefile = $request->nama . '-' . now()->timestamp . '.' . $extension;
+                   $request->file('foto')->move('foto', $namefile);
+               }
                 
                 $kurir = Kurir::create([
                      'id' => Str::uuid(),
+                     'id_user' => $request->user,
                      'nama' => $request->nama,
                      'alamat' => $request->alamat,
                      'tgl_lahir' => date("Y-m-d", strtotime($request->tgl_lahir)),
                      'jk' => $request->jk,
                      'no_hp' => $request->no_hp,
                      'no_ktp' => $request->no_ktp,
+               
                      //'foto' => $namefile,
-                     'email' => $request->email
+                     'email' => $request->email,
+                     'foto' => $namefile,
+                     'foto_url' => urlimage($namefile),
                  ]); 
                  
-                 if ($request->file('foto')){
-                     $extension = $request->file('foto')->getClientOriginalExtension();
-                     $namefile = $request->nama.'-'.now()->timestamp.'.'.$extension;
-                     $request->file('foto')->move('foto', $namefile);
-                     Keeper_foto::create([
-                         'id' => Str::uuid(),
-                         'id_keeper' => $keeper->id,
-                         'nama' => $namefile,
-                         'url' => urlimage($namefile) 
- 
-                     ]);
-                 }
              
                  Session::flash('status', 'success');
                  Session::flash('message', 'Tambah Data Kurir Berhasil');
               }
      else{
         //dd($namefile);
+            
+        if($request->file('foto')) {
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $namefile = $request->nama . '-' . now()->timestamp . '.' . $extension;
+            $request->file('foto')->move('foto', $namefile);
+        }
+        else{
+            $namefile=$request->fotolabel;
+        }
          Kurir::updateOrCreate(
              ['id' => $request->id],
              [
+                'id_user' => $request->user,
                 'nama' => $request->nama,
                 'alamat' => $request->alamat,
                 'tgl_lahir' => date("Y-m-d", strtotime($request->tgl_lahir)),
@@ -124,7 +146,9 @@ class KurirController extends Controller
                 'no_hp' => $request->no_hp,
                 'no_ktp' => $request->no_ktp,
                 //'foto' => $namefile,
-                'email' => $request->email
+                'email' => $request->email,
+                'foto' => $namefile,
+                'foto_url' => urlimage($namefile),
              ]
              );
  

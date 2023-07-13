@@ -20,6 +20,7 @@ class MenuController extends Controller
 {
     //
 
+
     
     public function index(Request $request){
 
@@ -78,29 +79,28 @@ class MenuController extends Controller
         return redirect()->back()->withInput();
     } else {
         if ($request->id == NULL || $request->id == "") {
+            $namefile = '';
+            if($request->file('foto')) {
+                $extension = $request->file('foto')->getClientOriginalExtension();
+                $namefile = $request->nama . '-' . now()->timestamp . '.' . $extension;
+                $request->file('foto')->move('foto', $namefile);
+            }
             $menu = Menu::create([
                 'id' => Str::uuid(),
                 'nama' => $request->nama,
                 'jenis' => $request->jenis,
                 'komposisi' => $request->komposisi,
                 'deskripsi' => $request->deskripsi,
+                'harga' => $request->harga,
+                'foto' => $namefile,
+                'foto_url' => urlimage($namefile),
             ]);
 
-            if ($request->file('foto')) {
-                $extension = $request->file('foto')->getClientOriginalExtension();
-                $namefile = $request->nama . '-' . now()->timestamp . '.' . $extension;
-                $request->file('foto')->move('foto', $namefile);
-
-                Keeper_foto::create([
-                    'id' => Str::uuid(),
-                    'id_keeper' => $menu->id, // Assuming $menu object is available and has the necessary id
-                    'nama' => $namefile,
-                    'url' => urlimage($namefile),
-                ]);
+        
 
                 Session::flash('status', 'success');
                 Session::flash('message', 'Tambah Data Menu Berhasil');
-            }
+            
         }
     
      else{
@@ -112,6 +112,9 @@ class MenuController extends Controller
                 'jenis' => $request->jenis,
                 'komposisi' => $request->komposisi,
                 'deskripsi' => $request->deskripsi,
+                'harga' => $request->harga,
+                'foto' => $namefile,
+                'foto_url' => urlimage($namefile),
              ]
              );
  

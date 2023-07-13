@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Mastersatwa extends Model
+class Users extends Model
 {
     use HasFactory;
 
-    protected $table = 'mastersatwa';
+    protected $table = 'users';
     
-    protected $fillable = ['id','namasatwa','kingdom','filum','kelas','ordo','famili','subfamili','genus','spesies','ancaman',
-                            'penyebaran','makanan','habitat','trenpopulasi','funfact'];
+    protected $fillable = ['id','name'];
 
     public function getIncrementing(){
         return false;
@@ -20,4 +20,9 @@ class Mastersatwa extends Model
     public function getKeyType(){
         return 'string';
     }
+
+    /*public function keeperfoto()
+    {
+        return $this->hasMany(Keeper_foto::Class, 'id_keeper', 'id');
+    }*/
 }

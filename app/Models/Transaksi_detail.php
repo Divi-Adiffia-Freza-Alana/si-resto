@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Mutasi extends Model
+class Transaksi_detail extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
-    protected $table = 'mutasi';
+    protected $table = 'transaksi_detail';
     
-    protected $fillable = ['id','id_satwa','instansi','tgl','keterangan','deskripsi'];
+    protected $fillable = ['id','id_menu','id_transaksi','qty','harga','subtotal'];
 
     public function getIncrementing(){
         return false;
@@ -19,4 +20,6 @@ class Mutasi extends Model
     public function getKeyType(){
         return 'string';
     }
+
+
 }

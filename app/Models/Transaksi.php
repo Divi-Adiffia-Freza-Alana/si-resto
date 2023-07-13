@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Keeper extends Model
+class Transaksi extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory;
 
-    protected $table = 'keeper';
+    protected $table = 'transaksi';
     
-    protected $fillable = ['id','nama','alamat','tgl_lahir','jk','telp','is_pic'];
+    protected $fillable = ['id','id_pembeli','id_kurir','tgl_transaksi','total'];
 
     public function getIncrementing(){
         return false;
@@ -21,8 +21,14 @@ class Keeper extends Model
         return 'string';
     }
 
-    public function keeperfoto()
+    /*public function keeperfoto()
     {
         return $this->hasMany(Keeper_foto::Class, 'id_keeper', 'id');
+    }*/
+
+    public function menu()
+    {
+        return $this->belongsToMany(Menu::class,'transaksi_detail','id_menu','id_transaksi');
     }
+
 }

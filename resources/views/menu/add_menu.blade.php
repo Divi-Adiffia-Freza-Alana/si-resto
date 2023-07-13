@@ -43,18 +43,17 @@
 
 
                     <div class="col-6">
-                      <img id="avatar" src="<?php echo (isset($data->keeperfoto[0]->url)?$data->keeperfoto[0]->url:""); ?>" class="avatar"> </img>
+                      <img id="avatar" src="<?php echo (isset($data->foto_url)?$data->foto_url:""); ?>" class="avatar"> </img>
                  
 
                     <div class="form-group" style="margin-top:25px;">
                    <!-- <label for="exampleInputFile">Foto</label>-->
                     <div class="input-group"  style="max-width:300px;margin:auto;">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="foto" name="foto" >
-                          <label class="custom-file-label" for="exampleInputFile"><?php echo (isset($data->keeperfoto[0]->nama)?$data->keeperfoto[0]->nama:"Choose File"); ?></label>
-                          <input type="hidden" id="fotolabel" name="fotolabel" value="<?php echo (isset($data->keeperfoto[0]->nama)?$data->keeperfoto[0]->nama:""); ?>">
-                          <input type="hidden" id="id_foto" name="id_foto" value="<?php echo (isset($data->keeperfoto[0]->id)?$data->keeperfoto[0]->id:""); ?>">
-                        </div>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="foto" name="foto" >
+                        <label class="custom-file-label" for="exampleInputFile"><?php echo (isset($data->foto)?$data->foto:"Choose File"); ?></label>
+                        <input type="hidden" id="fotolabel" name="fotolabel" value="<?php echo (isset($data->foto)?$data->foto:""); ?>">
+                      </div>
                         <!--<div class="input-group-append">
                           <span class="input-group-text">Upload</span>
                         </div>-->
@@ -78,6 +77,10 @@
                     <div class="form-group">
                       <label for="exampleInputEmail1">Komposisi</label>
                       <input type="text" class="form-control" name="komposisi" id="komposisi" placeholder="Komposisi" value="<?php echo (isset($data->komposisi)?$data->komposisi:""); ?>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Harga</label>
+                      <input type="text" class="form-control" name="harga" id="harga" placeholder="Harga" value="<?php echo (isset($data->harga)?$data->harga:""); ?>" required>
                     </div>
              
   

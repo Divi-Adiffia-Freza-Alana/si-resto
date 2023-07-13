@@ -11,17 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menu', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('nama');
-            $table->string('jenis');
-            $table->string('komposisi');
-            $table->string('deskripsi');
+        Schema::table('kurir', function (Blueprint $table) {
+            //
             $table->string('foto');
             $table->string('foto_url');
-            $table->float('harga');
-            $table->softDeletes();
-            $table->timestamps();
         });
     }
 
@@ -30,6 +23,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menu');
+        Schema::table('kurir', function (Blueprint $table) {
+            //
+            $table->dropColumn('foto');
+            $table->dropColumn('foto_url');
+
+
+        });
     }
 };

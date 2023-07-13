@@ -171,17 +171,10 @@
               </p>
             </a>
           </li>
-           <li class="nav-item">
-            <a href="/produk" class="nav-link">
-              <i class=" nav-icon fa-sharp fa-solid fa-cart-shopping"></i>
-              <p>
-                Keranjang
-              </p>
-            </a>
-          </li>
+      
             <li class="nav-item">
-            <a href="/users" class="nav-link">
-              <i class=" nav-icon fa-solid fa-money-bill"></i>
+            <a href="/transaksi" class="nav-link">
+              <i class=" nav-icon fa-solid fa-cart-shopping"></i>
               <p>
                 Transaksi 
               </p>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Users;
 use Illuminate\Http\RedirectResponse;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -29,6 +30,20 @@ class UsersController extends Controller
         }
         return view('users.users');
 
+    }
+
+    public function selectUser (Request $request)
+    {
+        $kurir = [];
+        if($request->has('q')){
+            $search = $request->q;
+            $kurir =Users::select("id", "name")
+                    ->where('name', 'LIKE', "%$search%")
+                    ->get();
+        }else{ 
+            $kurir =Users::select("id", "name")->orderBy('id')->get(10);
+        }
+        return response()->json($kurir);
     }
 
     public function add(){
@@ -100,6 +115,9 @@ class UsersController extends Controller
 
         return redirect('/users');
     }
+
+
+
 
 
 }

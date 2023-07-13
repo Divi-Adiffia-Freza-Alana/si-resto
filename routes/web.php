@@ -10,6 +10,7 @@ use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\kurirController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\TransaksiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,7 @@ Route::any('/usersstore', [UsersController::class, 'store']);
 Route::get('/users-add', [UsersController::class, 'add']);
 Route::any('/users-edit/{id}', [UsersController::class, 'edit']);
 Route::any('/users-delete/{id}', [UsersController::class, 'delete']);
+Route::any('/selectuser', [UsersController::class, 'selectUser']);
 
 
 //Route Kurir
@@ -43,6 +45,7 @@ Route::any('/kurirstore', [kurirController::class, 'store']);
 Route::get('/kurir-add', [kurirController::class, 'add']);
 Route::any('/kurir-edit/{id}', [kurirController::class, 'edit']);
 Route::any('/kurir-delete/{id}', [kurirController::class, 'delete']);
+Route::any('/selectkurir', [kurirController::class, 'selectKurir']);
 
 
 
@@ -68,10 +71,25 @@ Route::any('/menu-edit/{id}', [MenuController::class, 'edit']);
 Route::any('/menu-delete/{id}', [MenuController::class, 'delete']);
 
 
+
+
+//Route Transaksi
+Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
+Route::any('/transaksistore', [TransaksiController::class, 'store']);
+Route::get('/transaksi-add', [TransaksiController::class, 'add']);
+Route::any('/transaksi-edit/{id}', [TransaksiController::class, 'edit']);
+Route::any('/transaksi-delete/{id}', [TransaksiController::class, 'delete']);
+
+Route::any('/chooseproduct', [TransaksiController::class, 'choose']);
+Route::any('/cart', [TransaksiController::class, 'cart'])->name('transaksi.cart');
+Route::any('/add-to-cart/{id}', [TransaksiController::class, 'addToCart']);
+
+
 //Keranjang 
-Route::get('/produk', [KeranjangController::class, 'index']);
+/*Route::get('/produk', [KeranjangController::class, 'index']);
 Route::get('/cart', [KeranjangController::class, 'cart'])->name('keranjang.cart');
+
 Route::get('/add-to-cart/{id}', [KeranjangController::class, 'addToCart']);
 Route::patch('/update-cart', [KeranjangController::class, 'update']);
-Route::delete('remove-from-cart', [KeranjangController::class, 'remove']);
+Route::delete('remove-from-cart', [KeranjangController::class, 'remove']);*/
 

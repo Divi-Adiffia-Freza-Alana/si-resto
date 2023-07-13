@@ -1,8 +1,31 @@
 $(function () {
-    $('#selectkeeper').select2({
-        placeholder: 'Select Keeper',
+    $('#selectuser').select2({
+        placeholder: 'Select Users',
           ajax: {
-              url: '/selectkeeper',
+              url: '/selectuser',
+              dataType: 'json',
+              delay: 250,
+              processResults: function (data) {
+                  return {
+                      results: $.map(data, function (item) {
+                          return {
+                              text: item.name,
+                              id: item.id
+                          }
+                      })
+                  };
+              },
+              cache: true
+          }
+      });
+});
+
+
+$(function () {
+    $('#selectkurir').select2({
+        placeholder: 'Select Kurir',
+          ajax: {
+              url: '/selectkurir',
               dataType: 'json',
               delay: 250,
               processResults: function (data) {
@@ -20,93 +43,3 @@ $(function () {
       });
 });
 
-$(function () {
-    $('#selectmastersatwa').select2({
-        placeholder: 'Select Satwa',
-          ajax: {
-              url: '/selectmastersatwa',
-              dataType: 'json',
-              delay: 250,
-              processResults: function (data) {
-                  return {
-                      results: $.map(data, function (item) {
-                          return {
-                              text: item.namasatwa,
-                              id: item.id
-                          }
-                      })
-                  };
-              },
-              cache: true
-          }
-      });
-});
-
-
-$(function () {
-    $('#selectexhibit').select2({
-        placeholder: 'Select Exhibit',
-          ajax: {
-              url: '/selectexhibit',
-              dataType: 'json',
-              delay: 250,
-              processResults: function (data) {
-                  return {
-                      results: $.map(data, function (item) {
-                          return {
-                              text: item.kode_kandang,
-                              id: item.id
-                          }
-                      })
-                  };
-              },
-              cache: true
-          }
-      });
-});
-
-
-
-$(function () {
-    $('#selectholding').select2({
-        placeholder: 'Select Holding',
-          ajax: {
-              url: '/selectholding',
-              dataType: 'json',
-              delay: 250,
-              processResults: function (data) {
-                  return {
-                      results: $.map(data, function (item) {
-                          return {
-                              text: item.kode_kandang,
-                              id: item.id
-                          }
-                      })
-                  };
-              },
-              cache: true
-          }
-      });
-});
-
-$(function () {
-    $('#selectzona').select2({
-        placeholder: 'Select Zona',
-          ajax: {
-              url: '/selectzona',
-              dataType: 'json',
-              delay: 250,
-              processResults: function (data) {
-                  return {
-                      results: $.map(data, function (item) {
-                          return {
-                              text: item.nama,
-                              id: item.id
-                          }
-                      })
-                  };
-              },
-              cache: true
-          }
-      });
-});

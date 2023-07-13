@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('kurir', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('id_user')->required();
+            $table->foreign('id_user')->references('id')->on('users');
             $table->string('nama');
             $table->string('no_ktp');
             $table->date('tgl_lahir');

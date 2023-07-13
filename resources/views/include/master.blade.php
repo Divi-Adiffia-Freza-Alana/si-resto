@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sistem Informasi Konservasi</title>
+  <title>Sistem Informasi Resto</title>
   
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -141,6 +141,27 @@
       ]
 
   });
+
+  var tabletransaksi = $('#data-tables-transaksi').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "{{ route('transaksi.index') }}",
+      columns: [
+        {data: 'id', name: 'id'},
+        {data: 'tgl_transaksi', name: 'tgl_transaksi'},
+          {data: 'total', name: 'total'},
+         // {data: 'category.nama', name: 'category.nama'},
+         
+                   
+          {data: 'detail', name: 'detail', orderable: false, searchable: false},
+         
+          {data: 'action', name: 'action', orderable: false, searchable: false},
+          
+      ]
+
+
+  });
+
 
 
   var table = $('#data-tables-bahanbaku').DataTable({
