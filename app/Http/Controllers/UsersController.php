@@ -101,7 +101,7 @@ class UsersController extends Controller
         $user->assignRole($request->role);}
     else{
       
-        User::updateOrCreate(
+       $user= User::updateOrCreate(
             ['id' => $request->id],
             [          
             'name' => $request->name,
@@ -110,6 +110,8 @@ class UsersController extends Controller
             ]
 
             );
+
+            $user->assignRole($request->role);
             
         }
 

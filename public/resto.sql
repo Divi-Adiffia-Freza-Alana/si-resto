@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2023 at 02:06 AM
+-- Generation Time: Jul 13, 2023 at 02:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -170,7 +170,9 @@ CREATE TABLE `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(2, 'App\\Models\\User', '9dd718e9-381f-4b0b-ad26-be63e513c19b');
+(1, 'App\\Models\\User', '6ebe4855-c21f-4b96-be8e-22c571c261a0'),
+(2, 'App\\Models\\User', '9dd718e9-381f-4b0b-ad26-be63e513c19b'),
+(3, 'App\\Models\\User', '2e1292e8-53c4-41aa-8797-628f3b3c1fd8');
 
 -- --------------------------------------------------------
 
@@ -337,8 +339,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+('2e1292e8-53c4-41aa-8797-628f3b3c1fd8', 'pelanggan', 'pelanggan@gmail.com', NULL, '$2y$10$Jc.26QHmTuvzWRs4Wp90zeUlBVwS.veatCi1C3QTE7Vfqd7INy37i', NULL, '2023-07-12 17:25:02', '2023-07-12 17:25:02'),
 ('6ebe4855-c21f-4b96-be8e-22c571c261a0', 'admin', 'admin@gmail.com', NULL, '$2y$10$ykfV68VhAMY907lKNLT1y.ez3Zv8KklY0IRuTk39aVLaF/a8q2.Zu', NULL, NULL, NULL),
-('9dd718e9-381f-4b0b-ad26-be63e513c19b', 'kuri', 'kurir@gmail.com', NULL, '$2y$10$xwMon27BPlzOUsZPrp7p7.VzxUX8rh7CWx0Lli1qsdVf.bLb.zsgq', NULL, '2023-07-12 10:56:58', '2023-07-12 10:56:58');
+('9dd718e9-381f-4b0b-ad26-be63e513c19b', 'kurir', 'kurir@gmail.com', NULL, '$2y$10$xwMon27BPlzOUsZPrp7p7.VzxUX8rh7CWx0Lli1qsdVf.bLb.zsgq', NULL, '2023-07-12 10:56:58', '2023-07-12 17:32:28');
 
 --
 -- Indexes for dumped tables
