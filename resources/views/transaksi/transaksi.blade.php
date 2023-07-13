@@ -49,8 +49,9 @@
                   <tr>
                     <th>Id</th>
                     <th>Tanggal</th>
+                    <th>Pembeli</th>
+                    <th>Kurir</th>
                     <th>Total</th>
-             
                     <th>Detail</th>
                     <th>Action</th>
                   </tr>

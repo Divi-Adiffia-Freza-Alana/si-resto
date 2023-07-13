@@ -31,4 +31,16 @@ class Transaksi extends Model
         return $this->belongsToMany(Menu::class,'transaksi_detail','id_menu','id_transaksi');
     }
 
+    public function kurir()
+    {
+        return $this->hasMany(Kurir::Class, 'id', 'id_kurir');
+    }
+
+    public function pembeli()
+    {
+        {
+            return $this->hasMany(Users::Class, 'id', 'id_pembeli');
+    }
+
+}
 }

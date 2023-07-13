@@ -149,13 +149,12 @@
       columns: [
         {data: 'id', name: 'id'},
         {data: 'tgl_transaksi', name: 'tgl_transaksi'},
-          {data: 'total', name: 'total'},
-         // {data: 'category.nama', name: 'category.nama'},
-         
-                   
-          {data: 'detail', name: 'detail', orderable: false, searchable: false},
-         
-          {data: 'action', name: 'action', orderable: false, searchable: false},
+        {data: 'pembeli.name', name: 'pembeli.name'},
+        {data: 'kurir.nama', name: 'kurir.nama'},
+       
+        {data: 'total', name: 'total'},
+        {data: 'detail', name: 'detail', orderable: false, searchable: false}, 
+        {data: 'action', name: 'action', orderable: false, searchable: false},
           
       ]
 

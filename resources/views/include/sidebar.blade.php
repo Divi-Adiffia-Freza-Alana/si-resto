@@ -24,7 +24,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-       
+          @hasrole('superadmin')
           <li class="nav-item">
             <a href="/" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -33,7 +33,7 @@
               </p>
             </a>
           </li>
-       
+        @endhasrole
           <!--<li class="nav-item">
             <a href="#" class="nav-link">
               <i class=" nav-icon fa-solid fa-paw"></i>
@@ -111,7 +111,7 @@
           </li>-->
         
 
-          <!--@hasrole('super-admin')
+          <!--@hasrole('superadmin')
           <li class="nav-item">
             <a href="{{ url('zona') }}" class="nav-link">
               <i class="nav-icon fa-solid fa-location-dot"> </i>
@@ -129,7 +129,7 @@
               </p>
             </a>
           </li>-->
-
+          @hasrole('superadmin')
           <li class="nav-item">
             <a href="/menu" class="nav-link">
               <i class="nav-icon fa-solid fa-utensils"></i>
@@ -155,6 +155,7 @@
               </p>
             </a>
           </li>
+          @endhasrole
           <!--<li class="nav-item">
             <a href="index.html" class="nav-link">
               <i class=" nav-icon fa-solid fa-gear"></i>
@@ -163,6 +164,7 @@
               </p>
             </a>
           </li>-->
+          @hasrole('superadmin')
           <li class="nav-item">
             <a href="/users" class="nav-link">
               <i class=" nav-icon fa-solid fa-users"></i>
@@ -171,6 +173,7 @@
               </p>
             </a>
           </li>
+          @endhasrole
       
             <li class="nav-item">
             <a href="/transaksi" class="nav-link">

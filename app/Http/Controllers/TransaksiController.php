@@ -38,6 +38,12 @@ class TransaksiController extends Controller
                     /*->editColumn('tgl_lahir', function($data){ 
                         return dateformat($data->tgl_lahir);
                     })*/
+                    ->editColumn('pembeli.name', function($data){
+                        return $data->pembeli[0]->name;
+                    })
+                    ->editColumn('kurir.nama', function($data){
+                        return $data->kurir[0]->nama;
+                    })
                     ->addColumn('detail', function($row){
                         $btn = '<a class="btn bg-blue" href="/transaksi-detail/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-eye"></i> </a>';
                          return $btn;
