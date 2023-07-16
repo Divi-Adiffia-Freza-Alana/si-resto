@@ -28,7 +28,7 @@ class Transaksi extends Model
 
     public function menu()
     {
-        return $this->belongsToMany(Menu::class,'transaksi_detail','id_menu','id_transaksi');
+        return $this->belongsToMany(Menu::class,'transaksi_detail','id_transaksi','id_menu')->withPivot('qty');
     }
 
     public function bagdapur()
