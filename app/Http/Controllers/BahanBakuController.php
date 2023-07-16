@@ -31,24 +31,30 @@ class BahanBakuController extends Controller
                   /*->editColumn('keeperfoto.nama', function($data){
                         return $data->keeperfoto->nama;
                     })*/
-                    /*->editColumn('tgl_lahir', function($data){ 
+                    /*->editColumn('tgl_lah ir', function($data){ 
                         return dateformat($data->tgl_lahir);
                     })*/
                     ->addColumn('status', function($data){
                        
-                        if($data->stok < 5){
+                        if($data->stok >= 5 ){
+                            $btn = '<span class="badge badge-pill badge-primary">Aman</span>';
+         
+                        }
+                        
+                        else if($data->stok >= 1){
+                        
                             $btn = '<span class="badge badge-pill badge-warning">Menipis</span>';
                         }
                         else if($data->stok == 0){
                             $btn = '<span class="badge badge-pill badge-danger">Habis</span>';
                         }
-                        else{
+                        else {
                         
                             $btn = '<span class="badge badge-pill badge-primary">Aman</span>';
                         }
                        
                          return $btn;
-                 })
+                 }) 
                     ->addColumn('manajemenstok', function($row){
                            $btn = '<a class="btn btn-primary" href="/bahanbaku-transaction/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>';
                             return $btn;
@@ -137,8 +143,13 @@ class BahanBakuController extends Controller
                      'sisa' => $sisa,
 
                  ]); 
-                 
 
+                 $bahanbaku = BahanBaku::query()->get()->find($bahanbakutransaksi->id_bahanbaku);
+                 
+                 $bahanbaku->stok = $bahanbakutransaksi->sisa;
+        
+                 $bahanbaku->save();
+         
              
                  Session::flash('status', 'success');
                  Session::flash('message', 'Tambah Data Manajemen Stok Bahan Baku Berhasil');
@@ -225,7 +236,7 @@ class BahanBakuController extends Controller
                 $bahanbaku = BahanBaku::create([
                      'id' => Str::uuid(),
                      'nama' => $request->nama,
-                     'stok' => $request->stok,
+                     'stok' => 0,
                      'satuan' => $request->satuan,
 
                  ]); 
@@ -308,15 +319,15 @@ class BahanBakuController extends Controller
 
     public function delete($id){
 
-        $deleteKeeper = Keeper::findorFail($id);
-        $deleteKeeper->delete();
+        $delete = Bahanbaku::findorFail($id);
+        $delete->delete();
 
         /*$deleteKeeperfoto = Keeper_foto::findorFail($id);
         $deleteKeeperfoto->delete();*/
         Session::flash('status', 'success');
-        Session::flash('message', 'Delete Data Keeper Berhasil');
+        Session::flash('message', 'Delete Data Bahan Baku Berhasil');
 
-        return redirect('/keeper');
+        return redirect('/bahanbaku');
 
     }
 }

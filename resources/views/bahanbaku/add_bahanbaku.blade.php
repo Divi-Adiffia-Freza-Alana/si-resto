@@ -70,7 +70,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Stok</label>
-                      <input type="number" class="form-control" name="stok" id="stok" placeholder="Stok" value="<?php echo (isset($data->stok)?$data->stok:""); ?>" required>
+                      <input type="number" class="form-control" name="stok" id="stok" placeholder="Stok" value="<?php echo (isset($data->stok)?$data->stok:""); ?>" readonly>
                     </div>
                      <div class="form-group">
                       <label for="exampleInputEmail1">Satuan </label>
