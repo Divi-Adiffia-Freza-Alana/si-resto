@@ -40,7 +40,7 @@ class TransaksiController extends Controller
                         return dateformat($data->tgl_transaksi);
                     })
                     ->editColumn('konsumen.name', function($data){
-                        return $data->konsumen[0]->name;
+                        return $data->konsumen->name;
                     })
                     ->editColumn('bagdapur.nama', function($data){
                         return $data->bagdapur[0]->nama;
