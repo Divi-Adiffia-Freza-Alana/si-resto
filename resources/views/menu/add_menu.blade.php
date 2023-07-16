@@ -74,6 +74,10 @@
                         <option <?php echo (isset($data->jk)&&$data->jk=="Minuman"?"selected":""); ?> value="Minuman">Minuman</option>
                         </select>
                       </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Kode Menu </label>
+                        <input type="text" class="form-control" name="kd_menu" id="kd_menu" placeholder="Kode Menu" value="<?php echo (isset($data->kd_menu)?$data->kd_menu:""); ?>" required>
+                      </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Komposisi</label>
                       <input type="text" class="form-control" name="komposisi" id="komposisi" placeholder="Komposisi" value="<?php echo (isset($data->komposisi)?$data->komposisi:""); ?>" required>

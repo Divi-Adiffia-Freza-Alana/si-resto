@@ -33,7 +33,7 @@
             <div class="card card-primary">
               <div class="card-header bg-green">
                 <h3 class="card-title">Add to Cart</h3>
-               <div style="float:right;"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span></div>
+               <div style="float:right;"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart </div>
               </div>
               <!-- /.card-header -->
               <form action="/transaksistore" method="post" enctype="multipart/form-data">
@@ -49,17 +49,21 @@
                                   </div>
                               </div> 
                           </div>
-                          <div class="form-group col-md-6">
-                            <label>Kurir</label>
-                            <select id="selectkurir" name="kurir" class="form-control" style="width: 100%;">
+                         <!-- <div class="form-group col-md-6">
+                            <label>Bag dapur</label>
+                            <select id="selectbagdapur" name="bag_dapur" class="form-control" style="width: 100%;">
       
                             </select>
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label>Pembeli</label>
-                            <select id="selectuser" name="pembeli" class="form-control" style="width: 100%;">
+                          </div>-->
+                          <!--<div class="form-group col-md-6">
+                            <label>Konsumen</label>
+                            <select id="selectuser" name="konsumen" class="form-control" style="width: 100%;">
       
                             </select>
+                          </div>-->
+                          <div class="form-group  col-md-6">
+                            <label for="exampleInputEmail1">No Meja </label>
+                            <input type="text" class="form-control" name="no_meja" id="no_meja" placeholder="No Meja"  required>
                           </div>
                     </div>
                  
@@ -93,20 +97,20 @@
                         <tr>
                             <td data-th="Product">
                                 <div class="row">
-                                    <div class="col-sm-3 hidden-xs"><img src="" width="100" height="100" class="img-responsive"/></div>
-                                    <div class="col-sm-9">
+                                  <!--  <div class="col-sm-3 hidden-xs"><img src="" width="100" height="100" class="img-responsive"/></div>-->
+                                    <div class="col-sm-12">
                                         <h4 class="nomargin">{{ $details['name'] }}</h4>
                                     </div>
-                                </div>
+                                </div> 
                             </td>
-                            <td data-th="Price">${{ $details['price'] }}</td>
+                            <td data-th="Price">Rp.{{ $details['price'] }}</td>
                             <td data-th="Quantity">
                                 <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity" />
                             </td>
-                            <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td>
+                            <td data-th="Subtotal" class="text-center">Rp.{{ $details['price'] * $details['quantity'] }}</td>
                             <td class="actions" data-th="">
                                 <button class="btn btn-info btn-sm update-cart" data-id="{{ $id }}"><i class="fa fa-refresh"></i></button>
-                                <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}"><i class="fa fa-trash-o"></i></button>
+                                <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -115,14 +119,21 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td><a href="{{ url('/') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Lanjut Pilih Menu</a></td>
+                    <td><a href="{{ url('/chooseproduct') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Lanjut Pilih Menu</a></td>
                     <td colspan="2" class="hidden-xs"></td>
                     <td class="hidden-xs text-center"><strong>Total Rp.{{ $total }}</strong></td>
                 </tr>
                 </tfoot>
             </table>
             <div class="card-footer">
-                <button type="submit" class="btn bg-green">Submit</button>
+              <div class="row">
+
+                <div class="col-4"> <button type="submit" class="btn bg-green">Submit</button></div>
+                <div class="col-4"></div>
+                <div class="col-4"> <a class="btn btn-danger" href="/deletecart" style="color:#ffff;float:right;" >Clear Cart</a></div>
+              </div>
+               
+
               </div>
             </form>
             </div>

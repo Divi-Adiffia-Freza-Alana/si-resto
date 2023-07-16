@@ -7,7 +7,7 @@ use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BahanBakuController;
-use App\Http\Controllers\kurirController;
+use App\Http\Controllers\BagDapurController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\TransaksiController;
@@ -29,6 +29,9 @@ Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::get('/registration', [AuthController::class, 'registration'])->name('registration');
+Route::post('/createregistration', [AuthController::class, 'createregistration']);
+Route::post('/login', [AuthController::class, 'authenticate']);
 
 // Route Users
 Route::get('/users', [UsersController::class, 'index'])->name('user.index');
@@ -39,13 +42,13 @@ Route::any('/users-delete/{id}', [UsersController::class, 'delete']);
 Route::any('/selectuser', [UsersController::class, 'selectUser']);
 
 
-//Route Kurir
-Route::get('/kurir', [kurirController::class, 'index'])->name('kurir.index');
-Route::any('/kurirstore', [kurirController::class, 'store']);
-Route::get('/kurir-add', [kurirController::class, 'add']);
-Route::any('/kurir-edit/{id}', [kurirController::class, 'edit']);
-Route::any('/kurir-delete/{id}', [kurirController::class, 'delete']);
-Route::any('/selectkurir', [kurirController::class, 'selectKurir']);
+//Route Bag Dapur
+Route::get('/bagdapur', [BagDapurController::class, 'index'])->name('bagdapur.index');
+Route::any('/bagdapurstore', [BagDapurController::class, 'store']);
+Route::get('/bagdapur-add', [BagDapurController::class, 'add']);
+Route::any('/bagdapur-edit/{id}', [BagDapurController::class, 'edit']);
+Route::any('/bagdapur-delete/{id}', [BagDapurController::class, 'delete']);
+Route::any('/selectbagdapur', [BagDapurController::class, 'selectBagdapur']);
 
 
 
@@ -79,10 +82,26 @@ Route::any('/transaksistore', [TransaksiController::class, 'store']);
 Route::get('/transaksi-add', [TransaksiController::class, 'add']);
 Route::any('/transaksi-edit/{id}', [TransaksiController::class, 'edit']);
 Route::any('/transaksi-delete/{id}', [TransaksiController::class, 'delete']);
+Route::any('/transaksi-detail/{id}', [TransaksiController::class, 'detail']);
+
 
 Route::any('/chooseproduct', [TransaksiController::class, 'choose']);
 Route::any('/cart', [TransaksiController::class, 'cart'])->name('transaksi.cart');
 Route::any('/add-to-cart/{id}', [TransaksiController::class, 'addToCart']);
+Route::patch('/update-cart', [TransaksiController::class, 'updateCart']);
+Route::any('/deletecart', [TransaksiController::class, 'deleteallcart']);
+Route::delete('remove-from-cart', [TransaksiController::class, 'remove']);
+
+
+
+Route::group(['middleware' => ['role:superadmin']], function () {
+Route::any('/paid/{id}', [TransaksiController::class, 'paid']);
+
+});
+Route::group(['middleware' => ['role:bag_dapur']], function () {
+Route::any('/done/{id}', [TransaksiController::class, 'done']);
+
+});
 
 
 //Keranjang 

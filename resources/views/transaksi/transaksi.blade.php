@@ -50,8 +50,11 @@
                     <th>Id</th>
                     <th>Tanggal</th>
                     <th>Pembeli</th>
-                    <th>Kurir</th>
+                    <th>No Meja</th>
+                    <th>Bag Dapur</th>
                     <th>Total</th>
+                    <th>Status Pesanan</th>
+                    <th>Status Bayar</th>
                     <th>Detail</th>
                     <th>Action</th>
                   </tr>

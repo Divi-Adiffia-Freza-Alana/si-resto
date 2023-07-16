@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::table('transaksi', function (Blueprint $table) {
             //
-            $table->dropForeign(['id_kurir']);
-            $table->foreign('id_kurir')->references('id')->on('kurir');
+            $table->string('no_meja');
+            $table->string('status_bayar');
+           
+            
         });
     }
 
@@ -25,7 +27,9 @@ return new class extends Migration
     {
         Schema::table('transaksi', function (Blueprint $table) {
             //
-            $table->foreign('id_kurir')->references('id')->on('users');
+            $table->dropColumn('no_meja');
+            $table->dropColumn('status_bayar');
+          
         });
     }
 };

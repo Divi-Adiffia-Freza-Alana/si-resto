@@ -148,10 +148,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/kurir" class="nav-link">
+            <a href="/bagdapur" class="nav-link">
               <i class=" nav-icon fa-solid fa-users"></i>
               <p>
-                Kurir 
+                Bag Dapur 
               </p>
             </a>
           </li>

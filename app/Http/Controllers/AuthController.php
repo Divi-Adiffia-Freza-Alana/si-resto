@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use App\Models\User;
 use App\Models\Users;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
@@ -17,6 +20,64 @@ class AuthController extends Controller
         return view('login');
 
     }
+
+    public function registration()
+    {
+        return view('registration');
+    }
+
+    public function createregistration(Request $request)
+    {  
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+        ]);
+
+   
+
+
+        if($request->password == $request->confirmpassword){
+
+            //dd($request->all());
+
+                $user =User::create([
+                'id' => Str::uuid(),
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+              ]);
+
+                $user->assignRole('konsumen');
+                
+                Session::flash('status', 'success');
+                Session::flash('message', 'Registrasi Berhasil Silahkan Login');
+              
+    }else{
+             
+        Session::flash('status', 'fail');
+        Session::flash('message', 'Registrasi Gagal Silahkan Coba Kembali');
+
+
+       
+
+    }
+
+    return redirect("/login");
+
+   
+}
+
+/*public function create(array $data)
+{
+  return Users::create([
+    'id' => Str::uuid(),
+    'name' => $data['name'],
+    'email' => $data['email'],
+    'password' => Hash::make($data['password'])
+  ]);
+}    */
+
 
     public function authenticate(Request $request){
 
@@ -46,6 +107,8 @@ class AuthController extends Controller
         return redirect('/login');
 
     }
+
+
 
     public function logout(Request $request){
 

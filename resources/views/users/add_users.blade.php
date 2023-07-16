@@ -25,7 +25,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header bg-green">
-                <h3 class="card-title">Form Add Users</h3>
+                <h3 class="card-title">Form Users</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -52,8 +52,8 @@
                         <label>Role</label>
                         <select id="role" name="role" class="form-control" required>
                         <option <?php echo (isset($data->role)&&$data->role=="superadmin"?"selected":""); ?> value="superadmin">Superadmin</option>
-                        <option <?php echo (isset($data->role)&&$data->role=="kurir"?"selected":""); ?> value="kurir">Kurir</option>
-                        <option <?php echo (isset($data->role)&&$data->role=="pelanggan"?"selected":""); ?> value="pelanggan">Pelanggan</option>
+                        <option <?php echo (isset($data->role)&&$data->role=="bag_dapur"?"selected":""); ?> value="bag_dapur">Bag Dapur</option>
+                        <option <?php echo (isset($data->role)&&$data->role=="konsumen"?"selected":""); ?> value="konsumen">Konsumen</option>
                         </select>
                       </div>
                     </div>

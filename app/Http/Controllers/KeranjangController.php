@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Http\Controllers\Controller;
-use App\Models\Kurir;
+use App\Models\Bag_Dapur;
 use Illuminate\Http\RedirectResponse;
 
 use Carbon\Carbon;
@@ -88,7 +88,7 @@ class KeranjangController extends Controller
             session()->put('cart', $cart);
 
             session()->flash('success', 'Cart updated successfully');
-        }
+        } 
     }
 
     public function remove(Request $request)

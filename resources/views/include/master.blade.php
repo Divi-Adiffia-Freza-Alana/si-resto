@@ -124,11 +124,11 @@
   $(function () {
 
       
-  var table = $('#data-tables-kurir').DataTable({
+  var table = $('#data-tables-bagdapur').DataTable({
       processing: true,
       serverSide: true,
       autoWidth: true,
-      ajax: "{{ route('kurir.index') }}",
+      ajax: "{{ route('bagdapur.index') }}",
       columns: [ 
           {data: 'nama', name: 'nama'},
           {data: 'no_ktp', name: 'no_ktp'},
@@ -149,10 +149,12 @@
       columns: [
         {data: 'id', name: 'id'},
         {data: 'tgl_transaksi', name: 'tgl_transaksi'},
-        {data: 'pembeli.name', name: 'pembeli.name'},
-        {data: 'kurir.nama', name: 'kurir.nama'},
-       
+        {data: 'konsumen.name', name: 'konsumen.name'},
+        {data: 'no_meja', name: 'no_meja'},
+        {data: 'bagdapur.nama', name: 'bagdapur.nama'},
         {data: 'total', name: 'total'},
+        {data: 'statuspesanan', name: 'statusbayar'},
+        {data: 'statusbayar', name: 'statusbayar'},
         {data: 'detail', name: 'detail', orderable: false, searchable: false}, 
         {data: 'action', name: 'action', orderable: false, searchable: false},
           
@@ -172,6 +174,7 @@
           {data: 'nama', name: 'nama'},
           {data: 'stok', name: 'stok'},
           {data: 'satuan', name: 'satuan'},
+          {data: 'status', name: 'status'},
           {data: 'manajemenstok', name: 'manajemenstok', orderable: false, searchable: false},
          // {data: 'log', name: 'log', orderable: false, searchable: false},
           {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -244,8 +247,49 @@
   });
 
 
+  $(".update-cart").click(function (e) {
+
+    console.log("test");
+     e.preventDefault();
+
+     var ele = $(this);
+
+      $.ajax({
+         url: '{{ url('update-cart') }}',
+         method: "patch",
+         data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
+         success: function (response) {
+             window.location.reload();
+         }
+      });
+  });
+
+
 
   
+</script>
+
+<script type="text/javascript">
+
+
+
+ $(".remove-from-cart").click(function (e) {
+      e.preventDefault();
+
+      var ele = $(this);
+
+      if(confirm("Are you sure")) {
+          $.ajax({
+              url: '{{ url('remove-from-cart') }}',
+              method: "DELETE",
+              data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
+              success: function (response) {
+                  window.location.reload();
+              }
+          });
+      }
+  });
+
 </script>
 
 <!-- Select logic -->

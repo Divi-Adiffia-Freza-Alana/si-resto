@@ -12,7 +12,12 @@ class Users extends Model
 
     protected $table = 'users';
     
-    protected $fillable = ['id','name'];
+    protected $fillable = [
+        'id',
+        'name',
+        'email',
+        'password',
+    ];
 
     public function getIncrementing(){
         return false;

@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('kurir', function (Blueprint $table) {
+        Schema::table('transaksi', function (Blueprint $table) {
             //
-            $table->string('foto');
-            $table->string('foto_url');
+            $table->softDeletes();
         });
     }
 
@@ -23,12 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kurir', function (Blueprint $table) {
+        Schema::table('transaksi', function (Blueprint $table) {
             //
-            $table->dropColumn('foto');
-            $table->dropColumn('foto_url');
-
-
+            $table->dropColumn('deleted_at');
         });
     }
 };

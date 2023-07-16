@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kurir', function (Blueprint $table) {
+        Schema::create('bag_dapur', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('id_user')->required();
             $table->foreign('id_user')->references('id')->on('users');
@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('jk');
             $table->string('email');
             $table->text('alamat');
+            $table->string('foto');
+            $table->string('foto_url');
             $table->timestamps();
             $table->softDeletes();
         });

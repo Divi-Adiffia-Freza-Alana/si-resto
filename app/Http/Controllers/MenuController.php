@@ -87,6 +87,7 @@ class MenuController extends Controller
             }
             $menu = Menu::create([
                 'id' => Str::uuid(),
+                'kd_menu' => $request->kd_menu,
                 'nama' => $request->nama,
                 'jenis' => $request->jenis,
                 'komposisi' => $request->komposisi,
@@ -108,6 +109,7 @@ class MenuController extends Controller
          Menu::updateOrCreate(
              ['id' => $request->id],
              [
+                'kd_menu' => $request->kd_menu,
                 'nama' => $request->nama,
                 'jenis' => $request->jenis,
                 'komposisi' => $request->komposisi,

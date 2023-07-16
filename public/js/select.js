@@ -22,10 +22,10 @@ $(function () {
 
 
 $(function () {
-    $('#selectkurir').select2({
-        placeholder: 'Select Kurir',
+    $('#selectbagdapur').select2({
+        placeholder: 'Select Bag Dapur',
           ajax: {
-              url: '/selectkurir',
+              url: '/selectbagdapur',
               dataType: 'json',
               delay: 250,
               processResults: function (data) {

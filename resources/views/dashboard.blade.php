@@ -63,7 +63,7 @@
               <div class="inner">
                 <h3><?= $kurir?><sup style="font-size: 20px"></sup></h3>
 
-                <p>Kurir</p>
+                <p>Bag Dapur</p>
               </div>
               <div class="icon">
                 

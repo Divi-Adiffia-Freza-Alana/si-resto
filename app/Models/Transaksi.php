@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaksi extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
-    protected $table = 'transaksi';
+    protected $table = 'transaksi';  
     
-    protected $fillable = ['id','id_pembeli','id_kurir','tgl_transaksi','total'];
+    protected $fillable = ['id','id_konsumen','id_bag_dapur','tgl_transaksi','total','status','no_meja', 'status_bayar'];
 
     public function getIncrementing(){
         return false;
@@ -31,15 +31,15 @@ class Transaksi extends Model
         return $this->belongsToMany(Menu::class,'transaksi_detail','id_menu','id_transaksi');
     }
 
-    public function kurir()
+    public function bagdapur()
     {
-        return $this->hasMany(Kurir::Class, 'id', 'id_kurir');
+        return $this->hasMany(Bag_Dapur::Class, 'id', 'id_bag_dapur');
     }
 
-    public function pembeli()
+    public function konsumen()
     {
         {
-            return $this->hasMany(Users::Class, 'id', 'id_pembeli');
+            return $this->hasOne(Users::Class, 'id', 'id_konsumen');
     }
 
 }

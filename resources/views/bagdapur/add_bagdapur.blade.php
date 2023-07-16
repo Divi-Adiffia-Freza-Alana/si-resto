@@ -32,11 +32,11 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header bg-green">
-                <h3 class="card-title">Form Kurir</h3>
+                <h3 class="card-title">Form Bag Dapur</h3>
               </div>
               <!-- /.card-header -->
              
-              <form action="/kurirstore" method="post" enctype="multipart/form-data">
+              <form action="/bagdapurstore" method="post" enctype="multipart/form-data">
               @csrf
                 <div class="card-body">
                   <div class="row">
@@ -64,16 +64,16 @@
                       <br>
                     <input type="hidden" name="id" id="id" value="<?php echo (isset($data->id)?$data->id:""); ?>">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Nama Kurir </label>
-                      <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Kurir" value="<?php echo (isset($data->nama)?$data->nama:""); ?>" required>
+                      <label for="exampleInputEmail1">Nama Bag Dapur </label>
+                      <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Bag Dapur" value="<?php echo (isset($data->nama)?$data->nama:""); ?>" required>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">No. KTP</label>
                       <input type="text" class="form-control" name="no_ktp" id="no_ktp" placeholder="No. KTP" value="<?php echo (isset($data->no_ktp)?$data->no_ktp:""); ?>" required>
                     </div>
                      <div class="form-group">
-                      <label for="exampleInputEmail1">Email Kurir </label>
-                      <input type="text" class="form-control" name="email" id="email" placeholder="Email Kurir" value="<?php echo (isset($data->alamat)?$data->alamat:""); ?>" required>
+                      <label for="exampleInputEmail1">Email Bag Dapur </label>
+                      <input type="text" class="form-control" name="email" id="email" placeholder="Email Bag Dapur" value="<?php echo (isset($data->alamat)?$data->alamat:""); ?>" required>
                     </div>
                     <div class="form-group">
                       <label>User</label>

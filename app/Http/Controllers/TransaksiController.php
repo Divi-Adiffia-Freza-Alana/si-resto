@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
+use App\Models\Bag_Dapur;
 use App\Models\Transaksi;
 use App\Models\Transaksi_detail;
 use Illuminate\Http\RedirectResponse;
@@ -35,28 +36,92 @@ class TransaksiController extends Controller
                  /* ->editColumn('category.nama', function($data){
                         return $data->category[0]->nama;
                     })*/
-                    /*->editColumn('tgl_lahir', function($data){ 
-                        return dateformat($data->tgl_lahir);
-                    })*/
-                    ->editColumn('pembeli.name', function($data){
-                        return $data->pembeli[0]->name;
+                    ->editColumn('tgl_transaksi', function($data){ 
+                        return dateformat($data->tgl_transaksi);
                     })
-                    ->editColumn('kurir.nama', function($data){
-                        return $data->kurir[0]->nama;
+                    ->editColumn('konsumen.name', function($data){
+                        return $data->konsumen[0]->name;
+                    })
+                    ->editColumn('bagdapur.nama', function($data){
+                        return $data->bagdapur[0]->nama;
                     })
                     ->addColumn('detail', function($row){
                         $btn = '<a class="btn bg-blue" href="/transaksi-detail/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-eye"></i> </a>';
                          return $btn;
                  })
+                 ->addColumn('statuspesanan', function($data){
+                    if($data->status == 1){
+                        $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Dalam Proses</a>';
+                    }
+                   
+                    else{
+                    
+                        $btn = '<a class="btn bg-green" href="" style="color:#ffff;display:inline-block;" >Telah selesai </a>';
+                    }
+                   
+                     return $btn;
+             })
+                 ->addColumn('statusbayar', function($data){
+                    if($data->status_bayar == 1){
+                        $btn = '<a class="btn btn-warning" href="/paid/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Belum Lunas</a>';
+                    }
+                    else{
+                        $btn = '<a class="btn bg-green" href="" style="color:#00000;display:inline-block;" >Sudah Lunas</a>';
+                    }
+                   
+                     return $btn;
+             })
                     ->addColumn('action', function($row){
                            $btn ='<a class="btn btn-danger" href="/transaksi-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
                             return $btn;
                     })
-                    ->rawColumns(['action','detail'])
+                    
+                    ->rawColumns(['action','detail','statusbayar','statuspesanan'])
                     ->make(true);
         }
         return view('transaksi.transaksi'); 
     }
+
+
+    public function paid($id){
+        
+        //$transaksidata = Transaksi::query()->get()->find($id);
+        $transaksidata = Transaksi::findOrFail($id);
+
+        $transaksidata->status_bayar = 2;
+        
+        $transaksidata->save();
+
+        //$menu = Menu::all();
+       // $kandangdata = Kandang::with('keeperKandang')->get()->find($id);
+        //dd($keeperdata);
+
+        //var_dump($barang);
+        //exit();
+        return redirect('/transaksi');
+
+    }
+
+
+    public function done($id){
+        
+        //$transaksidata = Transaksi::query()->get()->find($id);
+        $transaksidata = Transaksi::findOrFail($id);
+
+        $transaksidata->status = 2;
+        
+        $transaksidata->save();
+
+        //$menu = Menu::all();
+       // $kandangdata = Kandang::with('keeperKandang')->get()->find($id);
+        //dd($keeperdata);
+
+        //var_dump($barang);
+        //exit();
+        return redirect('/transaksi');
+
+    }
+
 
 
 
@@ -74,6 +139,34 @@ class TransaksiController extends Controller
     }
 
 
+    public function updateCart(Request $request){
+
+       // dd($request->id);
+
+        if($request->id and $request->quantity)
+        {
+           /* \Cart::update($request->id, array(
+                'quantity' => $request->quantity, // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
+              ));*/
+              \Cart::update($request->id, array(
+                'quantity' => array(
+                    'relative' => false,
+                    'value' => $request->quantity
+                ),
+              ));
+        } 
+    }
+
+    public function remove(Request $request){
+
+        // dd($request->id);
+ 
+         if($request->id)
+         {
+            
+            \Cart::remove($request->id);
+         } 
+     }
     /*public function add(){
 
         return view('transaksi.add_menus');
@@ -89,6 +182,24 @@ class TransaksiController extends Controller
         return view('barang.add_barang',['data' =>$barangdata]);
 
     }*/
+
+    public function detail($id){
+
+        // dd($request->id);
+ 
+         if($id)
+         {
+             
+          $transaksidata = Transaksi::with(['menu','bagdapur','konsumen'])->get()->find($id);
+          
+          //var_dump($transaksidata);
+          //exit();
+         
+            
+         } 
+
+         return view('transaksi.detail',['data' =>$transaksidata]);
+     }
 
     public function addToCart($id)
     {
@@ -113,12 +224,25 @@ class TransaksiController extends Controller
             'id' => $menu->id, // inique row ID
             'name' => $menu->nama,
             'price' =>  $menu->harga,
+            'photo' =>  $menu->foto_url,
             'quantity' =>  1
         ));
 
         return view('transaksi.menu_cart',['data' =>$menuall ]);
 
         
+    }
+
+    public function deleteallcart(){
+        $items = \Cart::getContent();
+         //delete dataa
+         foreach($items as $row) {
+
+            // echo $row->id;
+             \Cart::remove($row->id); 
+         }
+
+         return redirect('/cart');
     }
 
 
@@ -147,14 +271,20 @@ class TransaksiController extends Controller
         return redirect()->back()->withInput();
     }*/ /*else {*/
 
+        $bagdapur = Bag_Dapur::latest()->first();
+        //var_dump($bagdapur);
+        //exit()
         $items = \Cart::getContent();
         if ($request->id == NULL || $request->id == "") {
             $transaksi = Transaksi::create([
                 'id' => Str::uuid(),
-                'id_pembeli' => $request->pembeli,
-                'id_kurir' => $request->kurir,
+                'id_konsumen' => auth()->user()->id,
+                'id_bag_dapur' => $bagdapur->id,
                 'tgl_transaksi' =>date("Y-m-d", strtotime($request->tgl_transaksi)),
                 'total' => \Cart::getTotal(),
+                'status' => 1,
+                'no_meja' => $request->no_meja,
+                'status_bayar' => 1,
              
             ]);
 

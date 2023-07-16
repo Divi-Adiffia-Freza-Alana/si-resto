@@ -50,6 +50,7 @@
                     <th>Nama</th>
                     <th>Stok</th>
                     <th>Satuan</th>
+                    <th>Status</th>
                    <!--<th>Foto</th>-->
                     <th>Manajemen Stok</th> 
                    <!-- <th>Log</th> -->

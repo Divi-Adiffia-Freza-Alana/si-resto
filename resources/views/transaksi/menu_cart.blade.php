@@ -33,7 +33,7 @@
             <div class="card card-primary">
               <div class="card-header bg-green">
                 <h3 class="card-title">Add to Cart</h3>
-               <div style="float:right;"><a href="/cart"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span></a></div>
+               <div style="float:right;"><a href="/cart"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart </a></div>
               </div>
               <!-- /.card-header -->
              

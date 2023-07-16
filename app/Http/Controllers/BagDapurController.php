@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Kurir;
+use App\Models\Bag_Dapur;
 use Illuminate\Http\RedirectResponse;
 
 use Carbon\Carbon;
@@ -13,22 +13,22 @@ use DataTables;
 use Session;
 use Validator;
 
-class KurirController extends Controller
+class BagDapurController extends Controller
 {
     //
 
-    public function selectKurir (Request $request)
+    public function selectBagdapur (Request $request)
     {
-        $kurir = [];
+        $bagdapur = [];
         if($request->has('q')){
             $search = $request->q;
-            $kurir =Kurir::select("id", "nama")
+            $bagdapur =Bag_Dapur::select("id", "nama")
                     ->where('nama', 'LIKE', "%$search%")
                     ->get();
         }else{ 
-            $kurir =Kurir::select("id", "nama")->orderBy('id')->get(10);
+            $bagdapur =Bag_Dapur::select("id", "nama")->orderBy('id')->get(10);
         }
-        return response()->json($kurir);
+        return response()->json($bagdapur);
     }
 
     public function index(Request $request){
@@ -37,8 +37,8 @@ class KurirController extends Controller
 
         if ($request->ajax()) {
            // $kurir = Kurir::with('');
-           $kurir = Kurir::query();
-            return  DataTables::of($kurir)
+           $bagdapur = Bag_Dapur::query();
+            return  DataTables::of($bagdapur)
                     ->addIndexColumn()
                   /*->editColumn('keeperfoto.nama', function($data){
                         return $data->keeperfoto->nama;
@@ -47,30 +47,30 @@ class KurirController extends Controller
                         return dateformat($data->tgl_lahir);
                     })
                     ->addColumn('action', function($row){
-                           $btn = '<a class="btn btn-primary" href="/kurir-edit/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>
-                                   <a class="btn btn-danger" href="/kurir-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
+                           $btn = '<a class="btn btn-primary" href="/bagdapur-edit/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>
+                                   <a class="btn btn-danger" href="/bagdapur-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('kurir.kurir');
+        return view('bagdapur.bagdapur');
 
     }
 
     public function add(){
 
-        return view('kurir.add_kurir');
+        return view('bagdapur.add_bagdapur');
 
     }
 
 
     public function edit($id){
         
-        $kurirdata = Kurir::query()->get()->find($id);
+        $bagdapurdata = Bag_Dapur::query()->get()->find($id);
        // $kandangdata = Kandang::with('keeperKandang')->get()->find($id);
         //dd($keeperdata);
-        return view('kurir.add_kurir',['data' =>$kurirdata]);
+        return view('bagdapur.add_bagdapur',['data' =>$bagdapurdata]);
 
     }
 
@@ -104,7 +104,7 @@ class KurirController extends Controller
                    $request->file('foto')->move('foto', $namefile);
                }
                 
-                $kurir = Kurir::create([
+                $bagdapur = Bag_Dapur::create([
                      'id' => Str::uuid(),
                      'id_user' => $request->user,
                      'nama' => $request->nama,
@@ -135,7 +135,7 @@ class KurirController extends Controller
         else{
             $namefile=$request->fotolabel;
         }
-         Kurir::updateOrCreate(
+        Bag_Dapur::updateOrCreate(
              ['id' => $request->id],
              [
                 'id_user' => $request->user,
@@ -198,20 +198,20 @@ class KurirController extends Controller
 
           
 
-        return redirect('/kurir');
+        return redirect('/bagdapur');
     }
 
     public function delete($id){
 
-        $deleteKurir = Kurir::findorFail($id);
-        $deleteKurir->delete();
+        $delete = Bag_Dapur::findorFail($id);
+        $delete->delete();
 
         /*$deleteKeeperfoto = Keeper_foto::findorFail($id);
         $deleteKeeperfoto->delete();*/
         Session::flash('status', 'success');
         Session::flash('message', 'Delete Data Kurir Berhasil');
 
-        return redirect('/kurir');
+        return redirect('/bagdapur');
 
     }
 }

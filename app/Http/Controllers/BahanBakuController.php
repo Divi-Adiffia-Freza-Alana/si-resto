@@ -34,20 +34,32 @@ class BahanBakuController extends Controller
                     /*->editColumn('tgl_lahir', function($data){ 
                         return dateformat($data->tgl_lahir);
                     })*/
+                    ->addColumn('status', function($data){
+                       
+                        if($data->stok < 5){
+                            $btn = '<span class="badge badge-pill badge-warning">Menipis</span>';
+                        }
+                        else if($data->stok == 0){
+                            $btn = '<span class="badge badge-pill badge-danger">Habis</span>';
+                        }
+                        else{
+                        
+                            $btn = '<span class="badge badge-pill badge-primary">Aman</span>';
+                        }
+                       
+                         return $btn;
+                 })
                     ->addColumn('manajemenstok', function($row){
                            $btn = '<a class="btn btn-primary" href="/bahanbaku-transaction/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>';
                             return $btn;
                     })
-                    /*->addColumn('log', function($row){
-                        $btn = '<a class="btn btn-primary" href="/transaksibahanbaku/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>';
-                         return $btn;
-                 })*/
+                  
                     ->addColumn('action', function($row){
                         $btn = '<a class="btn btn-primary" href="/bahanbaku-edit/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>
                                 <a class="btn btn-danger" href="/bahanbaku-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
                          return $btn;
                  })
-                    ->rawColumns(['manajemenstok','log','action'])
+                    ->rawColumns(['manajemenstok','log','status','action'])
                     ->make(true);
         }
         return view('bahanbaku.bahanbaku');
