@@ -53,7 +53,7 @@ class BahanBakuController extends Controller
                             $btn = '<span class="badge badge-pill badge-primary">Aman</span>';
                         }
                        
-                         return $btn;
+                         return $btn; 
                  }) 
                     ->addColumn('manajemenstok', function($row){
                            $btn = '<a class="btn btn-primary" href="/bahanbaku-transaction/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>';
