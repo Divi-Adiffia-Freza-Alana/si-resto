@@ -32,11 +32,11 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header bg-green">
-                <h3 class="card-title">Form Bag Dapur</h3>
+                <h3 class="card-title">Form Pelayan</h3>
               </div>
               <!-- /.card-header -->
              
-              <form action="/bagdapurstore" method="post" enctype="multipart/form-data">
+              <form action="/pelayanstore" method="post" enctype="multipart/form-data">
               @csrf
                 <div class="card-body">
   

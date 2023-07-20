@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bag_dapur', function (Blueprint $table) {
+        Schema::create('pelayan', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('id_user')->required();
             $table->foreign('id_user')->references('id')->on('users');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bag_dapur');
+        Schema::dropIfExists('pelayan');
     }
 };

@@ -23,7 +23,6 @@ return new class extends Migration
             $table->float('harga'); 
             $table->float('subtotal');
             $table->timestamps();
-    
         });
     }
 

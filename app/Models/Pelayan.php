@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Bag_Dapur extends Model
+class Pelayan extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $table = 'bag_dapur';
+    protected $table = 'pelayan';
     
     protected $fillable = ['id','id_user','no_hp','jk','status_kehadiran'];
 

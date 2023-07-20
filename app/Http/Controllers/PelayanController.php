@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Bag_Dapur;
+use App\Models\Pelayan;
 use Illuminate\Http\RedirectResponse;
 
 use Carbon\Carbon;
@@ -13,22 +13,22 @@ use DataTables;
 use Session;
 use Validator;
 
-class BagDapurController extends Controller
+class PelayanController extends Controller
 {
     //
 
-    public function selectBagdapur (Request $request)
+    public function selectBagpelayan (Request $request)
     {
-        $bagdapur = [];
+        $pelayan = [];
         if($request->has('q')){
             $search = $request->q;
-            $bagdapur =Bag_Dapur::select("id", "nama")
+            $pelayan =Pelayan::select("id", "nama")
                     ->where('nama', 'LIKE', "%$search%")
                     ->get();
         }else{ 
-            $bagdapur =Bag_Dapur::select("id", "nama")->orderBy('id')->get(10);
+            $pelayan =Pelayan::select("id", "nama")->orderBy('id')->get(10);
         }
-        return response()->json($bagdapur);
+        return response()->json($pelayan);
     }
 
     public function index(Request $request){
@@ -37,22 +37,23 @@ class BagDapurController extends Controller
 
         if ($request->ajax()) {
            // $kurir = Kurir::query('');
-           $bagdapur = Bag_Dapur::with('user');
-            return  DataTables::of($bagdapur)
+           $pelayan = Pelayan::with('user');
+            return  DataTables::of($pelayan)
                     ->addIndexColumn()
                   ->editColumn('user.name', function($data){
                         return $data->user[0]->name;
                     })
                     ->editColumn('status_kehadiran', function($data){
                         if($data->status_kehadiran == "Hadir"){
-                            $btn = '<a class="btn btn-warning" href="/unpresent-dapur/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Hadir</a>';
+                            $btn = '<a class="btn btn-warning" href="/unpresent/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Hadir</a>';
                         }
                         else{
-                            $btn = '<a class="btn bg-green" href="/present-dapur/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Tidak hadir</a>';
+                            $btn = '<a class="btn bg-green" href="/present/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Tidak hadir</a>';
                         }
                        
                          return $btn;
                     })
+                 
                     ->addColumn('action', function($row){
                            $btn = '<a class="btn btn-primary" href="/bagdapur-edit/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>
                                    <a class="btn btn-danger" href="/bagdapur-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
@@ -61,23 +62,23 @@ class BagDapurController extends Controller
                     ->rawColumns(['action','status_kehadiran'])
                     ->make(true);
         }
-        return view('bagdapur.bagdapur');
+        return view('pelayan.pelayan');
 
     }
 
     public function add(){
 
-        return view('bagdapur.add_bagdapur');
+        return view('pelayan.add_pelayan');
 
     }
 
 
     public function edit($id){
         
-        $bagdapurdata = Bag_Dapur::query()->get()->find($id);
+        $pelayandata = Pelayan::query()->get()->find($id);
        // $kandangdata = Kandang::with('keeperKandang')->get()->find($id);
         //dd($keeperdata);
-        return view('bagdapur.add_bagdapur',['data' =>$bagdapurdata]);
+        return view('pelayan.add_pelayan',['data' =>$pelayandata]);
 
     }
 
@@ -91,9 +92,8 @@ class BagDapurController extends Controller
  
             if($request->id == NULL || $request->id == "" ){
 
-           
                 
-                $bagdapur = Bag_Dapur::create([
+                $pelayan = Pelayan::create([
                      'id' => Str::uuid(),
                      'id_user' => $request->user,
                      'jk' => $request->jk,
@@ -103,12 +103,12 @@ class BagDapurController extends Controller
                  
              
                  Session::flash('status', 'success');
-                 Session::flash('message', 'Tambah Data Dapur Berhasil');
+                 Session::flash('message', 'Tambah Data Pelayan Berhasil');
               }
      else{
         //dd($namefile);
-
-        Bag_Dapur::updateOrCreate(
+            
+        Pelayan::updateOrCreate(
              ['id' => $request->id],
              [
                 'id_user' => $request->user,
@@ -152,11 +152,11 @@ class BagDapurController extends Controller
              
  
              Session::flash('status', 'success');
-             Session::flash('message', 'Edit Data Bag Dapur Berhasil');
+             Session::flash('message', 'Edit Data Pelayan Berhasil');
              
-         }
+         
             
-        
+        }
 
 
 
@@ -164,15 +164,14 @@ class BagDapurController extends Controller
 
           
 
-        return redirect('/bagdapur');
+        return redirect('/pelayan');
     }
 
 
-    
     public function present($id){
         
         //$transaksidata = Transaksi::query()->get()->find($id);
-        $data = Bag_Dapur::findOrFail($id);
+        $data = Pelayan::findOrFail($id);
 
         $data->status_kehadiran = "Hadir";
         
@@ -184,14 +183,14 @@ class BagDapurController extends Controller
 
         //var_dump($barang);
         //exit();
-        return redirect('/bagdapur');
+        return redirect('/pelayan');
 
     }
 
     public function unpresent($id){
         
         //$transaksidata = Transaksi::query()->get()->find($id);
-        $data = Bag_Dapur::findOrFail($id);
+        $data = Pelayan::findOrFail($id);
 
         $data->status_kehadiran = "Tidak Hadir";
         
@@ -203,22 +202,20 @@ class BagDapurController extends Controller
 
         //var_dump($barang);
         //exit();
-        return redirect('/bagdapur');
+        return redirect('/pelayan');
 
     }
-
-
     public function delete($id){
 
-        $delete = Bag_Dapur::findorFail($id);
+        $delete = Pelayan::findorFail($id);
         $delete->delete();
 
         /*$deleteKeeperfoto = Keeper_foto::findorFail($id);
         $deleteKeeperfoto->delete();*/
         Session::flash('status', 'success');
-        Session::flash('message', 'Delete Data Bag Dapur Berhasil');
+        Session::flash('message', 'Delete Data Pelayan Berhasil');
 
-        return redirect('/bagdapur');
+        return redirect('/pelayan');
 
     }
 }

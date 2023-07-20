@@ -155,6 +155,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/pelayan" class="nav-link">
+              <i class=" nav-icon fa-solid fa-users"></i>
+              <p>
+                Pelayan 
+              </p>
+            </a>
+          </li>
           @endhasrole
           <!--<li class="nav-item">
             <a href="index.html" class="nav-link">
@@ -165,6 +173,14 @@
             </a>
           </li>-->
           @hasrole('superadmin')
+          <li class="nav-item">
+            <a href="/meja" class="nav-link">
+              <i class=" nav-icon fa-solid fa-table"></i>
+              <p>
+                Meja 
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="/users" class="nav-link">
               <i class=" nav-icon fa-solid fa-users"></i>

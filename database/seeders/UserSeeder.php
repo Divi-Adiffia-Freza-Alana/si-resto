@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -16,11 +18,32 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //
-        DB::table('users')->insert([
-            'id' => Str::uuid(),
-            'name' => "admin",
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin12345'),
+        DB::table('roles')->insert([
+            'name' => "superadmin",
+            'guard_name' => 'web'
         ]);
+        DB::table('roles')->insert([
+            'name' => "bag_dapur",
+            'guard_name' => 'web'
+        ]);
+        DB::table('roles')->insert([
+            'name' => "pelayan",
+            'guard_name' => 'web'
+        ]);
+        DB::table('roles')->insert([
+            'name' => "konsumen",
+            'guard_name' => 'web'
+        ]);
+    
+       $user = DB::table('users')->insert([
+            'id' => Str::uuid(),
+            'name' => "kasir",
+            'email' => 'kasir@gmail.com',
+            'password' => Hash::make('kasir12345'),
+        ]);
+
+       // $user->assignRole('superadmin');
+    
+    
     }
 }

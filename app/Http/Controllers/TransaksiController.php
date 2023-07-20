@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
+use App\Models\Meja;
 use App\Models\Bag_Dapur;
+use App\Models\Pelayan;
 use App\Models\Transaksi;
 use App\Models\Transaksi_detail;
 use Illuminate\Http\RedirectResponse;
@@ -82,7 +84,7 @@ class TransaksiController extends Controller
             }else{
                    // $kurir = Kurir::with('');
            //$barang = Barang::query();
-            $transaksi = Transaksi::with(['menu']);
+            $transaksi = Transaksi::with(['menu','bagdapur','meja','konsumen','pelayan']);
             return  DataTables::of($transaksi)
                     ->addIndexColumn()
                  /* ->editColumn('category.nama', function($data){
@@ -94,8 +96,14 @@ class TransaksiController extends Controller
                     ->editColumn('konsumen.name', function($data){
                         return $data->konsumen->name;
                     })
+                    ->editColumn('meja.nomor', function($data){
+                        return $data->meja->nomor;
+                    })
+                    ->editColumn('pelayan.nama', function($data){
+                        return $data->pelayan->user[0]->name;
+                    })
                     ->editColumn('bagdapur.nama', function($data){
-                        return $data->bagdapur[0]->nama;
+                        return $data->bagdapur->user[0]->name;
                     })
                     ->addColumn('detail', function($row){
                         $btn = '<a class="btn bg-blue" href="/transaksi-detail/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-eye"></i> </a>';
@@ -325,23 +333,40 @@ class TransaksiController extends Controller
         Session::flash('message', $validator->messages()->first());
         return redirect()->back()->withInput();
     }*/ /*else {*/
+        // dd(Carbon::now()->format('d-m-Y'));
+        $bagdapur = Bag_Dapur::select("id")->where('status_kehadiran', '=', "Hadir")->get();
+        $pelayan = Pelayan::select("id")->where('status_kehadiran', '=', "Hadir")->get();
+        //var_dump(count($bagdapur));
+       // var_dump($bagdapur[rand(0,count($bagdapur)-1)]->id);
+        //exit();
+         //  var_dump($pelayan[rand(0,count($pelayan)-1)]->id);
+       // exit();
 
-        $bagdapur = Bag_Dapur::latest()->first();
         //var_dump($bagdapur);
         //exit()
         $items = \Cart::getContent();
         if ($request->id == NULL || $request->id == "") {
+
             $transaksi = Transaksi::create([
                 'id' => Str::uuid(),
                 'id_konsumen' => auth()->user()->id,
-                'id_bag_dapur' => $bagdapur->id,
-                'tgl_transaksi' =>date("Y-m-d", strtotime($request->tgl_transaksi)),
+                'id_bag_dapur' => $bagdapur[rand(0,count($bagdapur)-1)]->id,
+                'id_pelayan' => $pelayan[rand(0,count($pelayan)-1)]->id,
+                'id_meja' => $request->meja,
+                //'tgl_transaksi' =>date("Y-m-d", strtotime($request->tgl_transaksi)),
+                'tgl_transaksi' =>Carbon::now()->format('Y-m-d'),
                 'total' => \Cart::getTotal(),
                 'status' => 1,
-                'no_meja' => $request->no_meja,
+               // 'no_meja' => $request->no_meja,
                 'status_bayar' => 1,
              
             ]);
+        
+        $mejadata = Meja::findOrFail($transaksi->id_meja);
+
+        $mejadata->status = "Terpakai";
+        
+        $mejadata->save();
 
         foreach ($items as $row) {
             Transaksi_detail::create([  

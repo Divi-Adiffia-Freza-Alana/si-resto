@@ -8,9 +8,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\BagDapurController;
+use App\Http\Controllers\PelayanController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MejaController;
 use App\Http\Controllers\KeranjangController;
-use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\TransaksiController; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +53,15 @@ Route::any('/bagdapur-delete/{id}', [BagDapurController::class, 'delete']);
 Route::any('/selectbagdapur', [BagDapurController::class, 'selectBagdapur']);
 
 
+//Route Pelayan
+Route::get('/pelayan', [PelayanController::class, 'index'])->name('pelayan.index');
+Route::any('/pelayanstore', [PelayanController::class, 'store']);
+Route::get('/pelayan-add', [PelayanController::class, 'add']);
+Route::any('/pelayan-edit/{id}', [PelayanController::class, 'edit']);
+Route::any('/pelayan-delete/{id}', [PelayanController::class, 'delete']);
+Route::any('/selectpelayan', [PelayanController::class, 'selectPelayan']);
+
+
 
 //Route Bahan Baku
 Route::get('/bahanbaku', [BahanBakuController::class, 'index'])->name('bahanbaku.index');
@@ -76,6 +87,18 @@ Route::any('/menu-delete/{id}', [MenuController::class, 'delete']);
 
 
 
+
+//Route Meja
+Route::get('/meja', [MejaController::class, 'index'])->name('meja.index');
+Route::any('/mejastore', [MejaController::class, 'store']);
+Route::get('/meja-add', [MejaController::class, 'add']);
+Route::any('/meja-edit/{id}', [MejaController::class, 'edit']);
+Route::any('/meja-delete/{id}', [MejaController::class, 'delete']);
+Route::any('/selectmeja', [MejaController::class, 'selectMeja']);
+
+
+
+
 //Route Transaksi
 Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
 Route::any('/transaksistore', [TransaksiController::class, 'store']);
@@ -96,6 +119,13 @@ Route::delete('remove-from-cart', [TransaksiController::class, 'remove']);
 
 Route::group(['middleware' => ['role:superadmin']], function () {
 Route::any('/paid/{id}', [TransaksiController::class, 'paid']);
+Route::any('/update/{id}', [MejaController::class, 'update']);
+
+Route::any('/present/{id}', [PelayanController::class, 'present']);
+Route::any('/unpresent/{id}', [PelayanController::class, 'unpresent']);
+
+Route::any('/present-dapur/{id}', [BagDapurController::class, 'present']);
+Route::any('/unpresent-dapur/{id}', [BagDapurController::class, 'unpresent']);
 
 });
 Route::group(['middleware' => ['role:bag_dapur']], function () {

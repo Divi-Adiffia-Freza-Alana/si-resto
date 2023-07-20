@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('transaksi', function (Blueprint $table) {
-            //
+        Schema::create('meja', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('nomor');
+            $table->string('status');
+            $table->text('deskripsi');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -22,9 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('transaksi', function (Blueprint $table) {
-            //
-            $table->dropColumn('deleted_at');
-        });
+        Schema::dropIfExists('meja');
     }
 };

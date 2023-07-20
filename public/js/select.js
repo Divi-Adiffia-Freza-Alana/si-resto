@@ -43,3 +43,27 @@ $(function () {
       });
 });
 
+
+
+
+$(function () {
+    $('#selectmeja').select2({
+        placeholder: 'Select Meja',
+          ajax: {
+              url: '/selectmeja',
+              dataType: 'json',
+              delay: 250,
+              processResults: function (data) {
+                  return {
+                      results: $.map(data, function (item) {
+                          return {
+                              text: item.nomor,
+                              id: item.id
+                          }
+                      })
+                  };
+              },
+              cache: true
+          }
+      });
+});

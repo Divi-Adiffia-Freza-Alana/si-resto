@@ -43,22 +43,15 @@ class BagDapurController extends Controller
                   ->editColumn('user.name', function($data){
                         return $data->user[0]->name;
                     })
-                    ->editColumn('status_kehadiran', function($data){
-                        if($data->status_kehadiran == "Hadir"){
-                            $btn = '<a class="btn btn-warning" href="/unpresent-dapur/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Hadir</a>';
-                        }
-                        else{
-                            $btn = '<a class="btn bg-green" href="/present-dapur/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Tidak hadir</a>';
-                        }
-                       
-                         return $btn;
+                    ->editColumn('tgl_lahir', function($data){ 
+                        return dateformat($data->tgl_lahir);
                     })
                     ->addColumn('action', function($row){
                            $btn = '<a class="btn btn-primary" href="/bagdapur-edit/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>
                                    <a class="btn btn-danger" href="/bagdapur-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
                             return $btn;
                     })
-                    ->rawColumns(['action','status_kehadiran'])
+                    ->rawColumns(['action'])
                     ->make(true);
         }
         return view('bagdapur.bagdapur');
@@ -88,33 +81,74 @@ class BagDapurController extends Controller
     {   
 
 
+        $validator =  Validator::make($request->all(), [
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+            
+        ]);
+    
+        if ($validator->fails()) {
+
+            Session::flash('status', 'error');
+            Session::flash('message',  $validator->messages()->first());
+            return redirect()->back()->withInput();
+
+        } else {
  
             if($request->id == NULL || $request->id == "" ){
 
-           
+               // dd($request->All());
+               $namefile = '';
+               if($request->file('foto')) {
+                   $extension = $request->file('foto')->getClientOriginalExtension();
+                   $namefile = $request->nama . '-' . now()->timestamp . '.' . $extension;
+                   $request->file('foto')->move('foto', $namefile);
+               }
                 
                 $bagdapur = Bag_Dapur::create([
                      'id' => Str::uuid(),
                      'id_user' => $request->user,
+                     'nama' => $request->nama,
+                     'alamat' => $request->alamat,
+                     'tgl_lahir' => date("Y-m-d", strtotime($request->tgl_lahir)),
                      'jk' => $request->jk,
                      'no_hp' => $request->no_hp,
-                     'status_kehadiran' => $request->status_kehadiran,
+                     'no_ktp' => $request->no_ktp,
+               
+                     //'foto' => $namefile,
+                     'email' => $request->email,
+                     'foto' => $namefile,
+                     'foto_url' => urlimage($namefile),
                  ]); 
                  
              
                  Session::flash('status', 'success');
-                 Session::flash('message', 'Tambah Data Dapur Berhasil');
+                 Session::flash('message', 'Tambah Data Kurir Berhasil');
               }
      else{
         //dd($namefile);
-
+            
+        if($request->file('foto')) {
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $namefile = $request->nama . '-' . now()->timestamp . '.' . $extension;
+            $request->file('foto')->move('foto', $namefile);
+        }
+        else{
+            $namefile=$request->fotolabel;
+        }
         Bag_Dapur::updateOrCreate(
              ['id' => $request->id],
              [
                 'id_user' => $request->user,
+                'nama' => $request->nama,
+                'alamat' => $request->alamat,
+                'tgl_lahir' => date("Y-m-d", strtotime($request->tgl_lahir)),
                 'jk' => $request->jk,
                 'no_hp' => $request->no_hp,
-                'status_kehadiran' => $request->status_kehadiran,
+                'no_ktp' => $request->no_ktp,
+                //'foto' => $namefile,
+                'email' => $request->email,
+                'foto' => $namefile,
+                'foto_url' => urlimage($namefile),
              ]
              );
  
@@ -152,11 +186,11 @@ class BagDapurController extends Controller
              
  
              Session::flash('status', 'success');
-             Session::flash('message', 'Edit Data Bag Dapur Berhasil');
+             Session::flash('message', 'Edit Data Kurir Berhasil');
              
          }
             
-        
+        }
 
 
 
@@ -167,47 +201,6 @@ class BagDapurController extends Controller
         return redirect('/bagdapur');
     }
 
-
-    
-    public function present($id){
-        
-        //$transaksidata = Transaksi::query()->get()->find($id);
-        $data = Bag_Dapur::findOrFail($id);
-
-        $data->status_kehadiran = "Hadir";
-        
-        $data->save(); 
-
-        //$menu = Menu::all();
-       // $kandangdata = Kandang::with('keeperKandang')->get()->find($id);
-        //dd($keeperdata);
-
-        //var_dump($barang);
-        //exit();
-        return redirect('/bagdapur');
-
-    }
-
-    public function unpresent($id){
-        
-        //$transaksidata = Transaksi::query()->get()->find($id);
-        $data = Bag_Dapur::findOrFail($id);
-
-        $data->status_kehadiran = "Tidak Hadir";
-        
-        $data->save();
-
-        //$menu = Menu::all();
-       // $kandangdata = Kandang::with('keeperKandang')->get()->find($id);
-        //dd($keeperdata);
-
-        //var_dump($barang);
-        //exit();
-        return redirect('/bagdapur');
-
-    }
-
-
     public function delete($id){
 
         $delete = Bag_Dapur::findorFail($id);
@@ -216,7 +209,7 @@ class BagDapurController extends Controller
         /*$deleteKeeperfoto = Keeper_foto::findorFail($id);
         $deleteKeeperfoto->delete();*/
         Session::flash('status', 'success');
-        Session::flash('message', 'Delete Data Bag Dapur Berhasil');
+        Session::flash('message', 'Delete Data Kurir Berhasil');
 
         return redirect('/bagdapur');
 

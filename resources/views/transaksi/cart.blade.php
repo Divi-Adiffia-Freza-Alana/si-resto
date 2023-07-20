@@ -40,7 +40,7 @@
                 @csrf
                   <div class="card-body">
                     <div class="row">
-                        <div class="form-group col-md-6">
+                       <!-- <div class="form-group col-md-6">
                             <label>Tanggal Transaksi</label>
                               <div class="input-group date">
                                   <input id="tgl_transaksi" type="text" class="form-control datepicker" name="tgl_transaksi"  required/>
@@ -48,7 +48,7 @@
                                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                   </div>
                               </div> 
-                          </div>
+                          </div>-->
                          <!-- <div class="form-group col-md-6">
                             <label>Bag dapur</label>
                             <select id="selectbagdapur" name="bag_dapur" class="form-control" style="width: 100%;">
@@ -61,9 +61,15 @@
       
                             </select>
                           </div>-->
-                          <div class="form-group  col-md-6">
+                         <!-- <div class="form-group  col-md-6">
                             <label for="exampleInputEmail1">No Meja </label>
                             <input type="text" class="form-control" name="no_meja" id="no_meja" placeholder="No Meja"  required>
+                          </div>-->
+                          <div class="form-group col-md-6">
+                            <label>Meja</label>
+                            <select id="selectmeja" name="meja" class="form-control" style="width: 100%;">
+      
+                            </select>
                           </div>
                     </div>
                  

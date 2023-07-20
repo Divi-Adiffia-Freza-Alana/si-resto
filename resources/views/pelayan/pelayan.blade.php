@@ -35,19 +35,19 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-10">
-                    <h3 class="card-title">DataTable Bag Dapur</h3> 
+                    <h3 class="card-title">DataTable Pelayan</h3> 
                   </div>
                   <div class="col-2">
-                      <a class="btn btn-block bg-green" href="/bagdapur-add" style="color:#ffff;float:right;" >Add New +</a>
+                      <a class="btn btn-block bg-green" href="/pelayan-add" style="color:#ffff;float:right;" >Add New +</a>
                   </div>
                 </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="data-tables-bagdapur" class="table table-bordered table-striped" style="width:100%!important">
+                <table id="data-tables-pelayan" class="table table-bordered table-striped" style="width:100%!important">
                   <thead>
                   <tr>
-                    <th>Id</th>
+                    <th>id</th>
                     <th>Nama</th>
                     <th>No.HP</th>
                     <th>Jenis Kelamin</th>

@@ -130,13 +130,28 @@
       autoWidth: true,
       ajax: "{{ route('bagdapur.index') }}",
       columns: [ 
-          {data: 'nama', name: 'nama'},
-          {data: 'no_ktp', name: 'no_ktp'},
-          {data: 'tgl_lahir', name: 'tgl_lahir'},
+        {data: 'id', name: 'id', visible:false},
+          {data: 'user.name', name: 'user.name'},
           {data: 'no_hp', name: 'no_hp'},
-          {data: 'email', name: 'email'},
           {data: 'jk', name: 'jk'},
-          {data: 'alamat', name: 'alamat'},
+          {data: 'status_kehadiran', name: 'status_kehadiran'},
+          {data: 'action', name: 'action', orderable: false, searchable: false},
+      ]
+
+  });
+
+
+  var table = $('#data-tables-pelayan').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth: true,
+      ajax: "{{ route('pelayan.index') }}",
+      columns: [ 
+         {data: 'id', name: 'id', visible:false},
+          {data: 'user.name', name: 'user.name'},
+          {data: 'no_hp', name: 'no_hp'},
+          {data: 'jk', name: 'jk'},
+          {data: 'status_kehadiran', name: 'status_kehadiran'},
           {data: 'action', name: 'action', orderable: false, searchable: false},
       ]
 
@@ -150,8 +165,9 @@
         {data: 'id', name: 'id'},
         {data: 'tgl_transaksi', name: 'tgl_transaksi'},
         {data: 'konsumen.name', name: 'konsumen.name'},
-        {data: 'no_meja', name: 'no_meja'},
+        {data: 'meja.nomor', name: 'meja.nomor'},
         {data: 'bagdapur.nama', name: 'bagdapur.nama'},
+       {data: 'pelayan.nama', name: 'pelayan.nama'},
         {data: 'total', name: 'total'},
         {data: 'statuspesanan', name: 'statusbayar'},
         {data: 'statusbayar', name: 'statusbayar'},
@@ -201,6 +217,22 @@
       ]
 
   });
+
+  var table = $('#data-tables-meja').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth: true,
+      ajax: "{{ route('meja.index') }}",
+      columns: [ 
+          {data: 'nomor', name: 'nomor'},
+          {data: 'status', name: 'status'},
+          {data: 'deskripsi', name: 'deskripsi'},
+          {data: 'action', name: 'action', orderable: false, searchable: false},
+      ]
+
+  });
+
+
 
 
 

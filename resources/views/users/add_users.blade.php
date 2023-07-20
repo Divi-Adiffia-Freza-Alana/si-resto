@@ -53,6 +53,7 @@
                         <select id="role" name="role" class="form-control" required>
                         <option <?php echo (isset($data->role)&&$data->role=="superadmin"?"selected":""); ?> value="superadmin">Superadmin</option>
                         <option <?php echo (isset($data->role)&&$data->role=="bag_dapur"?"selected":""); ?> value="bag_dapur">Bag Dapur</option>
+                        <option <?php echo (isset($data->role)&&$data->role=="pelayan"?"selected":""); ?> value="pelayan">Pelayan</option>
                         <option <?php echo (isset($data->role)&&$data->role=="konsumen"?"selected":""); ?> value="konsumen">Konsumen</option>
                         </select>
                       </div>
