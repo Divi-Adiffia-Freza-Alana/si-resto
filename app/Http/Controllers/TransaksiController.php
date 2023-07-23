@@ -44,8 +44,14 @@ class TransaksiController extends Controller
                         ->editColumn('konsumen.name', function($data){
                             return $data->konsumen->name;
                         })
+                        ->editColumn('meja.nomor', function($data){
+                            return $data->meja->nomor;
+                        })
+                        ->editColumn('pelayan.nama', function($data){
+                            return $data->pelayan->user[0]->name;
+                        })
                         ->editColumn('bagdapur.nama', function($data){
-                            return $data->bagdapur[0]->nama;
+                            return $data->bagdapur->user[0]->name;
                         })
                         ->addColumn('detail', function($row){
                             $btn = '<a class="btn bg-blue" href="/transaksi-detail/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-eye"></i> </a>';
@@ -55,12 +61,16 @@ class TransaksiController extends Controller
                         if($data->status == 1){
                             $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Dalam Proses</a>';
                         }
+
+                        else if($data->status == 2){
+                            $btn = '<a class="btn bg-green" href="/deliver/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Telah Selesai</a>';
+                        }
                        
                         else{
                         
-                            $btn = '<a class="btn bg-green" href="" style="color:#ffff;display:inline-block;" >Telah selesai </a>';
+                            $btn = '<a class="btn bg-green" href="" style="color:#ffff;display:inline-block;" >Selesai Diantar </a>';
                         }
-                       
+                        
                          return $btn;
                  })
                      ->addColumn('statusbayar', function($data){
@@ -113,18 +123,23 @@ class TransaksiController extends Controller
                     if($data->status == 1){
                         $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Dalam Proses</a>';
                     }
+
+                    else if($data->status == 2){
+                        $btn = '<a class="btn btn-warning" href="/deliver/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Telah Selesai</a>';
+                    }
                    
                     else{
                     
-                        $btn = '<a class="btn bg-green" href="" style="color:#ffff;display:inline-block;" >Telah selesai </a>';
+                        $btn = '<a class="btn bg-green" href="" style="color:#ffff;display:inline-block;" >Selesai Diantar </a>';
                     }
                    
                      return $btn;
              })
                  ->addColumn('statusbayar', function($data){
                     if($data->status_bayar == 1){
-                        $btn = '<a class="btn btn-warning" href="/paid/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Belum Lunas</a>';
+                        $btn = '<a class="btn btn-warning" href="/countpaid/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Belum Lunas</a>';
                     }
+                    
                     else{
                         $btn = '<a class="btn bg-green" href="" style="color:#00000;display:inline-block;" >Sudah Lunas</a>';
                     }
@@ -145,11 +160,33 @@ class TransaksiController extends Controller
         return view('transaksi.transaksi'); 
     }
 
-
-    public function paid($id){
+    public function countpaid($id){
         
         //$transaksidata = Transaksi::query()->get()->find($id);
         $transaksidata = Transaksi::findOrFail($id);
+
+       // $transaksidata->status_bayar = 2;
+        
+        // /$transaksidata->save();
+
+        //$menu = Menu::all();
+       // $kandangdata = Kandang::with('keeperKandang')->get()->find($id);
+        //dd($keeperdata);
+
+        //var_dump($barang);
+        //exit();
+        //ar_dump($transaksidata);
+        //exit();
+        return view('transaksi.countpaid',['data' =>$transaksidata]);
+       // return redirect('/transaksi');
+
+    }
+
+
+    public function paid(Request $request){
+        
+        //$transaksidata = Transaksi::query()->get()->find($id);
+        $transaksidata = Transaksi::findOrFail($request->id);
 
         $transaksidata->status_bayar = 2;
         
@@ -185,6 +222,25 @@ class TransaksiController extends Controller
 
     }
 
+    public function deliver($id){
+        
+        //$transaksidata = Transaksi::query()->get()->find($id);
+        $transaksidata = Transaksi::findOrFail($id);
+
+        $transaksidata->status = 3;
+        
+        $transaksidata->save();
+
+        //$menu = Menu::all();
+       // $kandangdata = Kandang::with('keeperKandang')->get()->find($id);
+        //dd($keeperdata);
+
+        //var_dump($barang);
+        //exit();
+        return redirect('/transaksi');
+
+    }
+
 
 
 
@@ -196,7 +252,7 @@ class TransaksiController extends Controller
         //dd($keeperdata);
 
         //var_dump($barang);
-        //exit();
+        //exit(); 
         return view('transaksi.menu_cart',['data' =>$menu ]);
 
     }
@@ -336,6 +392,14 @@ class TransaksiController extends Controller
         // dd(Carbon::now()->format('d-m-Y'));
         $bagdapur = Bag_Dapur::select("id")->where('status_kehadiran', '=', "Hadir")->get();
         $pelayan = Pelayan::select("id")->where('status_kehadiran', '=', "Hadir")->get();
+        $transaksi = Transaksi::where('tgl_transaksi', '=', Carbon::now()->format('Y-m-d'))->get();
+        $num = count($transaksi)+1;
+        $id_transaksi = "TR".Carbon::now()->format('Ymd').$num;
+        //$nownum = intval($num)+1;
+
+       // var_dump($id_transaksi);
+
+        //exit();
         //var_dump(count($bagdapur));
        // var_dump($bagdapur[rand(0,count($bagdapur)-1)]->id);
         //exit();
@@ -353,6 +417,7 @@ class TransaksiController extends Controller
                 'id_bag_dapur' => $bagdapur[rand(0,count($bagdapur)-1)]->id,
                 'id_pelayan' => $pelayan[rand(0,count($pelayan)-1)]->id,
                 'id_meja' => $request->meja,
+                'kode' => $id_transaksi,
                 //'tgl_transaksi' =>date("Y-m-d", strtotime($request->tgl_transaksi)),
                 'tgl_transaksi' =>Carbon::now()->format('Y-m-d'),
                 'total' => \Cart::getTotal(),

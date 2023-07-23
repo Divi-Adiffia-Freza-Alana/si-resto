@@ -44,6 +44,7 @@
                   @hasrole('konsumen')
                   @endhasrole
                 </div>
+             
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -51,6 +52,7 @@
                   <thead>
                   <tr>
                     <th>Id</th>
+                    <th>Kode</th>
                     <th>Tanggal</th>
                     <th>Pembeli</th>
                     <th>No Meja</th>

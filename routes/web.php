@@ -118,8 +118,10 @@ Route::delete('remove-from-cart', [TransaksiController::class, 'remove']);
 
 
 Route::group(['middleware' => ['role:superadmin']], function () {
-Route::any('/paid/{id}', [TransaksiController::class, 'paid']);
+Route::any('/paid', [TransaksiController::class, 'paid']);
 Route::any('/update/{id}', [MejaController::class, 'update']);
+
+Route::any('/countpaid/{id}', [TransaksiController::class, 'countpaid']);
 
 Route::any('/present/{id}', [PelayanController::class, 'present']);
 Route::any('/unpresent/{id}', [PelayanController::class, 'unpresent']);
@@ -134,6 +136,12 @@ Route::any('/done/{id}', [TransaksiController::class, 'done']);
 });
 
 
+Route::group(['middleware' => ['role:pelayan']], function () {
+    Route::any('/deliver/{id}', [TransaksiController::class, 'deliver']);
+    
+    });
+    
+    
 //Keranjang 
 /*Route::get('/produk', [KeranjangController::class, 'index']);
 Route::get('/cart', [KeranjangController::class, 'cart'])->name('keranjang.cart');

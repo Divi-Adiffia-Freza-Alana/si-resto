@@ -120,6 +120,17 @@
   });
 </script>
 
+
+<script>
+  $(document).ready(() => {
+      $("#bayar").change(function () {
+         var int = $("#total").val() - $("#bayar").val();
+         //console.log(int);
+         $("#kembali").val(int);
+      });
+  });
+</script>
+
 <script>
   $(function () {
 
@@ -162,7 +173,8 @@
       serverSide: true,
       ajax: "{{ route('transaksi.index') }}",
       columns: [
-        {data: 'id', name: 'id'},
+        {data: 'id', name: 'id',orderable: false, searchable: false,visible:false},
+        {data: 'kode', name: 'kode'},
         {data: 'tgl_transaksi', name: 'tgl_transaksi'},
         {data: 'konsumen.name', name: 'konsumen.name'},
         {data: 'meja.nomor', name: 'meja.nomor'},

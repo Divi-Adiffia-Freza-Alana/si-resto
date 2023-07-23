@@ -64,7 +64,7 @@ class UsersController extends Controller
         $delete = User::findorFail($id);
         $delete->delete();
 
-        return redirect('/user');
+        return redirect('/users');
 
     }
 
