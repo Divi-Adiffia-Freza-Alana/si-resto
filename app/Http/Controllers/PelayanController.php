@@ -55,8 +55,8 @@ class PelayanController extends Controller
                     })
                  
                     ->addColumn('action', function($row){
-                           $btn = '<a class="btn btn-primary" href="/bagdapur-edit/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>
-                                   <a class="btn btn-danger" href="/bagdapur-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
+                           $btn = '<a class="btn btn-primary" href="/pelayan-edit/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-pen-to-square"></i> </a>
+                                   <a class="btn btn-danger" href="/pelayan-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action','status_kehadiran'])
