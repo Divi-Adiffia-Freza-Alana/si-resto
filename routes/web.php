@@ -42,8 +42,8 @@ Route::get('/users-add', [UsersController::class, 'add']);
 Route::any('/users-edit/{id}', [UsersController::class, 'edit']);
 Route::any('/users-delete/{id}', [UsersController::class, 'delete']);
 Route::any('/selectuser', [UsersController::class, 'selectUser']);
-Route::any('/selectdapur', [UsersController::class, 'selectDapur']);
-Route::any('/selectpelayan', [UsersController::class, 'selectPelayan']);
+Route::any('/selectdapurs', [UsersController::class, 'selectDapur']);
+Route::any('/selectpelayans', [UsersController::class, 'selectPelayan']);
 
 
 //Route Bag Dapur

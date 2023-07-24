@@ -44,7 +44,7 @@
                   <div class="row">
                     <div class="form-group col-md-4">
                       <label>User</label>
-                      <select id="selectuser" name="user" class="form-control" style="width: 100%;">
+                      <select id="selectpelayans" name="user" class="form-control" style="width: 100%;">
                       <option value=<?php echo (isset($data->user[0]->id)?$data->user[0]->id:"")?> selected><?php echo (isset($data->user[0]->name)?$data->user[0]->name:"")?></option>
                       </select>
                     </div>

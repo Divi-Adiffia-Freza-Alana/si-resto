@@ -53,9 +53,26 @@ class UsersController extends Controller
             $search = $request->q;
             $kurir =Users::select("id", "name")
                     ->where('name', 'LIKE', "%$search%")
+                    ->where('role', '=', "bag_dapur")
                     ->get();
         }else{ 
-            $kurir =Users::select("id", "name")->orderBy('id')->get(10);
+            $kurir =Users::select("id", "name")->where('role', '=', "bag_dapur")->orderBy('id')->get(10);
+        }
+        return response()->json($kurir);
+    }
+
+
+    public function selectPelayan (Request $request)
+    {
+        $kurir = [];
+        if($request->has('q')){
+            $search = $request->q;
+            $kurir =Users::select("id", "name")
+                    ->where('name', 'LIKE', "%$search%")
+                    ->where('role', 'LIKE', "pelayan")
+                    ->get();
+        }else{ 
+            $kurir =Users::select("id", "name")->where('role', 'LIKE', "pelayan")->orderBy('id')->get(10);
         }
         return response()->json($kurir);
     }
@@ -109,6 +126,7 @@ class UsersController extends Controller
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
+        'role' => $request->role,
 
     ]); 
         //$user->id;
@@ -121,6 +139,7 @@ class UsersController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
+            'role' => $request->role,
             ]
 
             );

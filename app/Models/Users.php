@@ -17,6 +17,7 @@ class Users extends Model
         'name',
         'email',
         'password',
+        'role',
     ];
 
     public function getIncrementing(){

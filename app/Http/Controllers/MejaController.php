@@ -29,7 +29,7 @@ class MejaController extends Controller
                     ->orderBy('nomor', 'asc')
                     ->get();
         }else{ 
-            $meja =Meja::select("id", "nomor")->orderBy('id')->where('status', '=', "Kosong")->get(10);
+            $meja =Meja::select("id", "nomor")->orderBy('nomor', 'asc')->where('status', '=', "Kosong")->get(10);
         }
         return response()->json($meja);
     }
