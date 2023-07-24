@@ -46,6 +46,20 @@ class UsersController extends Controller
         return response()->json($kurir);
     }
 
+    public function selectDapur (Request $request)
+    {
+        $kurir = [];
+        if($request->has('q')){
+            $search = $request->q;
+            $kurir =Users::select("id", "name")
+                    ->where('name', 'LIKE', "%$search%")
+                    ->get();
+        }else{ 
+            $kurir =Users::select("id", "name")->orderBy('id')->get(10);
+        }
+        return response()->json($kurir);
+    }
+
     public function add(){
 
         return view('users.add_users');

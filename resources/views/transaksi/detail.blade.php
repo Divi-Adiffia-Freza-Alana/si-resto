@@ -9,7 +9,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+ 
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -30,7 +30,7 @@
                 <div class="card-body">
                   <div class="row"> 
 
-                    <div class="col-6"> Kode Transaksi :  {{$data->id}}</div>
+                    <div class="col-6"> Kode Transaksi :  {{$data->kode}}</div>
                     <div class="col-6"> Tanggal:  {{dateformat($data->tgl_transaksi)}}</div>
                     <div class="col-6"> No. Meja :  {{$data->meja->nomor}}</div>
                     <div class="col-6"> Nama :  {{$data->konsumen->name}}</div>

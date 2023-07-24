@@ -26,6 +26,7 @@ class MejaController extends Controller
             $meja =Meja::select("id", "nomor")
                     ->where('nomor', 'LIKE', "%$search%")
                     ->where('status', '=', "Kosong")
+                    ->orderBy('nomor', 'asc')
                     ->get();
         }else{ 
             $meja =Meja::select("id", "nomor")->orderBy('id')->where('status', '=', "Kosong")->get(10);
