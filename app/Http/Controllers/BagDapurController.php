@@ -35,13 +35,15 @@ class BagDapurController extends Controller
 
         //dd(Keeper::with(['keeperfoto']));
 
+        
+
         if ($request->ajax()) {
            // $kurir = Kurir::query('');
            $bagdapur = Bag_Dapur::with('user');
             return  DataTables::of($bagdapur)
                     ->addIndexColumn()
                   ->editColumn('user.name', function($data){
-                        return $data->user[0]->name;
+                        return $data->user->name;
                     })
                     ->editColumn('status_kehadiran', function($data){
                         if($data->status_kehadiran == "Hadir"){

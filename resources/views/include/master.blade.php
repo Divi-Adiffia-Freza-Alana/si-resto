@@ -135,11 +135,24 @@
   $(function () {
 
       
-  var table = $('#data-tables-bagdapur').DataTable({
+  var tabledapur = $('#data-tables-bagdapur').DataTable({
       processing: true,
       serverSide: true,
       autoWidth: true,
-      ajax: "{{ route('bagdapur.index') }}",
+      //ajax: "{{ route('bagdapur.index') }}",
+      ajax: {
+
+        url: "{{ route('bagdapur.index') }}",
+
+        data: function (d) {
+
+              d.status = $('#status').val(),
+
+              d.search = $('input[type="search"]').val()
+
+          }
+
+        },
       columns: [ 
         {data: 'id', name: 'id', visible:false},
           {data: 'user.name', name: 'user.name'},
@@ -151,6 +164,11 @@
 
   });
 
+  $('#filtermonth').change(function(){
+    console.log("asup");
+    tabletransaksi.draw();
+
+  });
 
   var table = $('#data-tables-pelayan').DataTable({
       processing: true,
@@ -171,7 +189,20 @@
   var tabletransaksi = $('#data-tables-transaksi').DataTable({
       processing: true,
       serverSide: true,
-      ajax: "{{ route('transaksi.index') }}",
+     // ajax: "{{ route('transaksi.index') }}",
+     ajax: {
+
+          url: "{{ route('transaksi.index') }}",
+
+          data: function (d) {
+
+                d.filtermonth = $('#filtermonth').val(),
+
+                d.search = $('input[type="search"]').val()
+
+            }
+
+          },
       columns: [
         {data: 'id', name: 'id',orderable: false, searchable: false,visible:false},
         {data: 'kode', name: 'kode'},

@@ -24,7 +24,7 @@ class Pelayan extends Model
 
     public function user()
     {
-        return $this->hasMany(Users::Class, 'id', 'id_user');
+        return $this->hasOne(Users::Class, 'id', 'id_user');
     }
 
     /*public function keeperfoto()

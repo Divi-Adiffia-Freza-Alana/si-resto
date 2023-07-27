@@ -41,7 +41,7 @@ class PelayanController extends Controller
             return  DataTables::of($pelayan)
                     ->addIndexColumn()
                   ->editColumn('user.name', function($data){
-                        return $data->user[0]->name;
+                        return $data->user->name;
                     })
                     ->editColumn('status_kehadiran', function($data){
                         if($data->status_kehadiran == "Hadir"){

@@ -43,7 +43,10 @@
                 </div>
               </div>
               <!-- /.card-header -->
+             
               <div class="card-body">
+                
+
                 <table id="data-tables-pelayan" class="table table-bordered table-striped" style="width:100%!important">
                   <thead>
                   <tr>
