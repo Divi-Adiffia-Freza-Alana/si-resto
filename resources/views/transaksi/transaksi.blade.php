@@ -37,11 +37,11 @@
                   <div class="col-10">
                     <h3 class="card-title">DataTable Transaksi</h3> 
                   </div>
-                 
+                  @hasrole('konsumen')
                   <div class="col-2">
                       <a class="btn btn-block bg-green" href="/chooseproduct" style="color:#ffff;float:right;" >Add New +</a>
                   </div>
-                  @hasrole('konsumen')
+                 
                   @endhasrole
                 </div>
              

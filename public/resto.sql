@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2023 at 02:52 PM
+-- Generation Time: Jul 30, 2023 at 03:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,7 +43,8 @@ CREATE TABLE `bag_dapur` (
 --
 
 INSERT INTO `bag_dapur` (`id`, `id_user`, `no_hp`, `jk`, `status_kehadiran`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('09db6c1d-9ce5-4f8e-9e6f-141c2d6df273', '916bb538-5382-4bad-859f-b7126dec9c4b', '0878282826877', 'Laki-Laki', 'Hadir', '2023-07-30 05:37:26', '2023-07-30 05:37:26', NULL);
+('09db6c1d-9ce5-4f8e-9e6f-141c2d6df273', '916bb538-5382-4bad-859f-b7126dec9c4b', '0878282826877', 'Laki-Laki', 'Hadir', '2023-07-30 05:37:26', '2023-07-30 05:37:26', NULL),
+('0c425907-0318-4b6a-a055-e6c73678972e', 'af3b31e9-1d73-4b5c-956a-cef50726428c', '087828737389', 'Laki-Laki', 'Hadir', '2023-07-30 06:47:04', '2023-07-30 06:47:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -140,7 +141,7 @@ INSERT INTO `meja` (`id`, `nomor`, `status`, `deskripsi`, `created_at`, `updated
 ('deac0cc7-842f-46da-9441-05fda23d3a1a', '03', 'Kosong', 'meja depan', '2023-07-22 19:33:11', '2023-07-22 19:33:11', NULL),
 ('eaeb6d92-812c-43fa-9381-d244f916f48b', '15', 'Kosong', 'meja belakang', '2023-07-22 19:36:55', '2023-07-23 01:31:15', NULL),
 ('ec5d6bca-953e-481e-9f72-a6f44519722a', '02', 'Terpakai', 'meja depan', '2023-07-22 19:32:50', '2023-07-30 05:38:31', NULL),
-('fa316de7-4821-4233-81f8-f6db9097b772', '20', 'Kosong', 'meja belakang', '2023-07-23 01:33:51', '2023-07-23 01:33:51', NULL);
+('fa316de7-4821-4233-81f8-f6db9097b772', '20', 'Terpakai', 'meja belakang', '2023-07-23 01:33:51', '2023-07-30 06:52:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -256,10 +257,14 @@ CREATE TABLE `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\Models\\User', 'af3b31e9-1d73-4b5c-956a-cef50726428c'),
 (1, 'App\\Models\\User', 'c72c85f5-0ba8-4b04-abf4-d39b16fd4a89'),
 (2, 'App\\Models\\User', '916bb538-5382-4bad-859f-b7126dec9c4b'),
+(2, 'App\\Models\\User', 'af3b31e9-1d73-4b5c-956a-cef50726428c'),
+(3, 'App\\Models\\User', '54971f3c-2c1e-41f1-aba5-6590d372e50f'),
 (3, 'App\\Models\\User', 'cab92a8b-0624-423c-8558-54c7ba488608'),
-(4, 'App\\Models\\User', '3704bee6-41ec-4788-a976-57083366ac22');
+(4, 'App\\Models\\User', '3704bee6-41ec-4788-a976-57083366ac22'),
+(4, 'App\\Models\\User', '5a12783a-2696-495e-8446-2165d104c4b3');
 
 -- --------------------------------------------------------
 
@@ -295,6 +300,7 @@ CREATE TABLE `pelayan` (
 --
 
 INSERT INTO `pelayan` (`id`, `id_user`, `no_hp`, `jk`, `status_kehadiran`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('14f2b953-9262-46e3-bc41-37d7d89e1ec6', '54971f3c-2c1e-41f1-aba5-6590d372e50f', '0878282826876', 'Laki-Laki', 'Hadir', '2023-07-30 06:51:29', '2023-07-30 06:51:29', NULL),
 ('5c52e78d-4d09-4121-8445-c599b3fb0689', 'cab92a8b-0624-423c-8558-54c7ba488608', '0878282826870', 'Laki-Laki', 'Hadir', '2023-07-30 05:37:02', '2023-07-30 05:37:02', NULL);
 
 -- --------------------------------------------------------
@@ -426,6 +432,7 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `id_konsumen`, `id_bag_dapur`, `id_pelayan`, `id_meja`, `kode`, `tgl_transaksi`, `total`, `status`, `status_bayar`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('3a8b2169-b360-4cec-9488-932e81b39006', '5a12783a-2696-495e-8446-2165d104c4b3', '09db6c1d-9ce5-4f8e-9e6f-141c2d6df273', '14f2b953-9262-46e3-bc41-37d7d89e1ec6', 'fa316de7-4821-4233-81f8-f6db9097b772', 'TR202307302', '2023-07-30', 130000.00, '1', '1', '2023-07-30 06:52:56', '2023-07-30 06:52:56', NULL),
 ('ce5bf4a4-7ced-4f07-a568-d1c7eb985d69', '3704bee6-41ec-4788-a976-57083366ac22', '09db6c1d-9ce5-4f8e-9e6f-141c2d6df273', '5c52e78d-4d09-4121-8445-c599b3fb0689', 'ec5d6bca-953e-481e-9f72-a6f44519722a', 'TR202307301', '2023-07-30', 96000.00, '1', '1', '2023-07-30 05:38:31', '2023-07-30 05:38:31', NULL);
 
 -- --------------------------------------------------------
@@ -450,8 +457,11 @@ CREATE TABLE `transaksi_detail` (
 --
 
 INSERT INTO `transaksi_detail` (`id`, `id_menu`, `id_transaksi`, `qty`, `harga`, `subtotal`, `created_at`, `updated_at`) VALUES
+('548d059b-159a-4d5d-af85-d9a7712e780b', 'cb18ff88-4880-4c73-9bcc-adff90b298bc', '3a8b2169-b360-4cec-9488-932e81b39006', 1, 20000.00, 20000.00, '2023-07-30 06:52:56', '2023-07-30 06:52:56'),
+('a5086708-6532-43bc-bbc5-e77ffc646da6', 'f6a88ddd-8e19-4568-88af-0097b429e68d', '3a8b2169-b360-4cec-9488-932e81b39006', 1, 55000.00, 55000.00, '2023-07-30 06:52:56', '2023-07-30 06:52:56'),
 ('a8e48155-4608-413d-80ce-5305ffacd98b', '36caee59-9651-4b99-b5dc-402379471932', 'ce5bf4a4-7ced-4f07-a568-d1c7eb985d69', 1, 27000.00, 27000.00, '2023-07-30 05:38:31', '2023-07-30 05:38:31'),
 ('ae8f546f-7877-4284-9abd-326d155d6067', 'f4e3ae0d-235a-4e7e-8139-a2e58a84096e', 'ce5bf4a4-7ced-4f07-a568-d1c7eb985d69', 1, 14000.00, 14000.00, '2023-07-30 05:38:31', '2023-07-30 05:38:31'),
+('c314a467-059e-463c-bbd8-295d947961c6', '02d8720f-ed74-4e0a-9520-357536c146f3', '3a8b2169-b360-4cec-9488-932e81b39006', 1, 55000.00, 55000.00, '2023-07-30 06:52:56', '2023-07-30 06:52:56'),
 ('c8176f6e-dab2-431c-8002-cc2c70c11a8a', '02d8720f-ed74-4e0a-9520-357536c146f3', 'ce5bf4a4-7ced-4f07-a568-d1c7eb985d69', 1, 55000.00, 55000.00, '2023-07-30 05:38:31', '2023-07-30 05:38:31');
 
 -- --------------------------------------------------------
@@ -479,7 +489,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`, `role`) VALUES
 ('3704bee6-41ec-4788-a976-57083366ac22', 'eko', 'eko@gmail.com', NULL, '$2y$10$Ew94VkVzxIajKn4IuKT5/u3LccK2XNEF8ko9Ctc78toOeZ7eNsx2m', NULL, '2023-07-30 05:30:11', '2023-07-30 05:30:11', NULL, 'konsumen'),
+('54971f3c-2c1e-41f1-aba5-6590d372e50f', 'juni', 'juni@gmail.com', NULL, '$2y$10$4v8pNZ7nGNmK2mJIkeUCCeA8P.mT3hGKaHbRa6YSggMg129tZvlkC', NULL, '2023-07-30 06:49:55', '2023-07-30 06:49:55', NULL, 'pelayan'),
+('5a12783a-2696-495e-8446-2165d104c4b3', 'dede', 'dede@gmail.com', NULL, '$2y$10$Hy25Iud5KDbOo/d8IauEqORc0CAyGIHhsFZ0ZFFHnQ9cDWHJV8LWG', NULL, '2023-07-30 06:50:15', '2023-07-30 06:50:15', NULL, 'konsumen'),
 ('916bb538-5382-4bad-859f-b7126dec9c4b', 'adit', 'dapur@gmail.com', NULL, '$2y$10$BzJE/jWdO1sxM2b.fe3TpO7W0xwYlAvbvpeaPnLWxgJUj559AXF2O', NULL, '2023-07-30 05:29:26', '2023-07-30 05:29:26', NULL, 'bag_dapur'),
+('af3b31e9-1d73-4b5c-956a-cef50726428c', 'juli', 'juli@gmail.com', NULL, '$2y$10$Vg0po3jK38O3tzqgY2vYQuLk2r7Md1U6IJZuihTsb1Zu.glvSH/Eu', NULL, '2023-07-30 06:46:36', '2023-07-30 06:46:47', NULL, 'bag_dapur'),
 ('c72c85f5-0ba8-4b04-abf4-d39b16fd4a89', 'kasir', 'kasir@gmail.com', NULL, '$2y$10$rv9Ef8DPbbIEjnMzIY3O0OnZpZPpHbMcSu6g75vVYUF.7TKZPjHXe', NULL, NULL, NULL, NULL, 'superadmin'),
 ('cab92a8b-0624-423c-8558-54c7ba488608', 'aan', 'pelayan@gmail.com', NULL, '$2y$10$wFCiLHzSRZsRoKiItLFgZ.wOhSRu9fM1FI8HtYI/o1YBcn1zpiagG', NULL, '2023-07-30 05:29:51', '2023-07-30 05:29:51', NULL, 'pelayan');
 
