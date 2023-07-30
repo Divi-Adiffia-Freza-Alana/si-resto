@@ -144,14 +144,6 @@
 
         url: "{{ route('bagdapur.index') }}",
 
-        data: function (d) {
-
-              d.status = $('#status').val(),
-
-              d.search = $('input[type="search"]').val()
-
-          }
-
         },
       columns: [ 
         {data: 'id', name: 'id', visible:false},
