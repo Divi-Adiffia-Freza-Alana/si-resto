@@ -59,7 +59,7 @@ class TransaksiController extends Controller
                      })
                      ->addColumn('statuspesanan', function($data){
                         if($data->status == 1){
-                            $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Dalam Proses</a>';
+                            $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Silahkan Tunggy</a>';
                         }
 
                         else if($data->status == 2){
@@ -86,6 +86,39 @@ class TransaksiController extends Controller
                         ->addColumn('action', function($row){
                                $btn ='<a class="btn btn-danger" href="/transaksi-delete/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-trash"></i></a>';
                                 return $btn;
+                        })
+
+                        ->filter(function ($instance) use ($request) {
+
+                            if ($request->get('filtermonth') == NULL ) {
+    
+    
+    
+                                $instance->with(['menu'])->where('id_konsumen', '=', auth()->user()->id)->whereMonth('tgl_transaksi', $request->get('filtermonth'));
+                                //exit();
+    
+    
+                              //  $instance->whereMonth('tgl_transaksi', $request->get('filtermonth'));
+    
+                            }
+                            
+                            else{
+                              //  var_dump($request->get('filtermonth'));
+                                //$instance = Transaksi::with(['pelayan'=> function ($query) {
+                                  //  $query->where('id_user', '=', auth()->user()->id);}])->whereMonth('tgl_transaksi', $request->get('filtermonth'));
+                               //$instance = Transaksi::with(['pelayan'])->get();
+                               //$instance[0]->whereMonth('tgl_transaksi', $request->get('filtermonth'))
+                               $instance->with(['menu'] )->where('id_konsumen', '=', auth()->user()->id);;
+                       
+                              // $instance = Transaksi::with(['pelayan'=> function ($query) {
+                               // $query->where('id_user', '=', auth()->user()->id);}]);
+                            
+                               //$instance = Transaksi::whereMonth('tgl_transaksi', $request->get('filtermonth'));
+                                //var_dump($instance);
+                            }
+    
+                 
+    
                         })
                         
                         ->rawColumns(['action','detail','statusbayar','statuspesanan'])
@@ -122,7 +155,7 @@ class TransaksiController extends Controller
                      })
                      ->addColumn('statuspesanan', function($data){
                         if($data->status == 1){
-                            $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Dalam Proses</a>';
+                            $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Silahkan Tunggu</a>';
                         }
 
                         else if($data->status == 2){
@@ -220,7 +253,7 @@ class TransaksiController extends Controller
                      })
                      ->addColumn('statuspesanan', function($data){
                         if($data->status == 1){
-                            $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Dalam Proses</a>';
+                            $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Silahkan Tunggu</a>';
                         }
 
                         else if($data->status == 2){
@@ -327,7 +360,7 @@ class TransaksiController extends Controller
                  })
                  ->addColumn('statuspesanan', function($data){
                     if($data->status == 1){
-                        $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Dalam Proses</a>';
+                        $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Silahkan Tunggu</a>';
                     }
 
                     else if($data->status == 2){
@@ -470,13 +503,15 @@ class TransaksiController extends Controller
     public function choose(){
         
         //$transaksidata = Transaksi::with(['barang'])->get()->find($id);
-        $menu = Menu::all();
+        $menumakanan = Menu::select("*")->where('jenis','=','makanan')->get();
+        $menuminuman = Menu::select("*")->where('jenis','=','minuman')->get();
+       // $menu = Menu::select('id','kd_menu','nama','foto_url','harga')->groupBy('jenis')->get();
        // $kandangdata = Kandang::with('keeperKandang')->get()->find($id);
         //dd($keeperdata);
 
         //var_dump($barang);
         //exit(); 
-        return view('transaksi.menu_cart',['data' =>$menu ]);
+        return view('transaksi.menu_cart',['datamakanan' =>$menumakanan, 'dataminuman' =>$menuminuman ]);
 
     }
 

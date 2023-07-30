@@ -40,15 +40,51 @@
               <form action="/barangstore" method="post" enctype="multipart/form-data">
               @csrf
                 <div class="card-body">
+                  <h1 class="text-center">Makanan</h1>
                   <div class="row">
-                    @foreach ($data as $d)
+                    
+                    @foreach ($datamakanan as $d)
                     <div class="col-4">
                       <div class="card" style="width: 18rem;display:block;margin: auto;">
                         <img class="card-img-top" src="{{$d->foto_url}}"  alt="Card image cap" width="100px" height="200px" style="display:block;margin:10px auto;">
                         <div class="card-body">
                           <h5 class="card-title">{{$d->nama}}</h5>
                           <p class="card-text">Rp. {{$d->harga}}.</p>
-                          <a style="display:block;margin: auto;" href="/add-to-cart/{{$d->id}}" class="btn btn-primary bg-green">Add</a>
+                          <?php
+                          if($d->status == "Tersedia" || $d->status == ""){
+                           echo '<a style="display:block;margin: auto;" href="/add-to-cart/{{$d->id}}" class="btn bg-green">Add</a>';
+                          }
+                          else{
+                            echo ' <a style="display:block;margin: auto;" href="#" class="btn  bg-red">Stok Habis</a>';
+                                                     
+                          }
+                          ?>
+                        </div>
+                      </div>
+                    </div>
+                      
+                    @endforeach
+                    
+                  </div>
+                  <h1 class="text-center">Minuman</h1>
+                  <div class="row">
+                    
+                    @foreach ($dataminuman as $d)
+                    <div class="col-4">
+                      <div class="card" style="width: 18rem;display:block;margin: auto;">
+                        <img class="card-img-top" src="{{$d->foto_url}}"  alt="Card image cap" width="100px" height="200px" style="display:block;margin:10px auto;">
+                        <div class="card-body">
+                          <h5 class="card-title">{{$d->nama}}</h5>
+                          <p class="card-text">Rp. {{$d->harga}}.</p>
+                          <?php
+                          if($d->status == "Tersedia" || $d->status == ""){
+                           echo '<a style="display:block;margin: auto;" href="/add-to-cart/{{$d->id}}" class="btn bg-green">Add</a>';
+                          }
+                          else{
+                            echo ' <a style="display:block;margin: auto;" href="#" class="btn  bg-red">Stok Habis</a>';
+                                                     
+                          }
+                          ?> 
                         </div>
                       </div>
                     </div>

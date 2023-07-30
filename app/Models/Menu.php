@@ -12,7 +12,7 @@ class Menu extends Model
 
     protected $table = 'menu';
     
-    protected $fillable = ['id','kd_menu','nama','jenis','komposisi','deskripsi','foto','foto_url','harga'];
+    protected $fillable = ['id','kd_menu','nama','jenis','komposisi','deskripsi','foto','foto_url','harga','status'];
 
     public function getIncrementing(){
         return false;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2023 at 02:53 AM
+-- Generation Time: Jul 30, 2023 at 09:44 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -45,7 +45,8 @@ CREATE TABLE `bag_dapur` (
 INSERT INTO `bag_dapur` (`id`, `id_user`, `no_hp`, `jk`, `status_kehadiran`, `created_at`, `updated_at`, `deleted_at`) VALUES
 ('3c4c244e-54cb-4a79-9291-d8eb92667dc3', 'd5062408-f339-4163-ac46-488a08f287b9', '082134562134', 'Laki-Laki', 'Hadir', '2023-07-23 03:10:52', '2023-07-23 03:10:52', NULL),
 ('463e0f80-28ac-45c0-9f66-0a5b2da13f59', 'cd2a55da-ba34-49e5-8cda-0865e624e771', '087845673421', 'Perempuan', 'Hadir', '2023-07-23 03:10:06', '2023-07-23 03:10:25', NULL),
-('4b8b25bb-2391-431a-bd78-760e51ac5915', 'a9d73c30-b783-4b00-88cd-cffd95947ff5', '0878282826878', 'Laki-Laki', 'Hadir', '2023-07-21 07:55:49', '2023-07-21 07:55:49', NULL);
+('4b8b25bb-2391-431a-bd78-760e51ac5915', 'a9d73c30-b783-4b00-88cd-cffd95947ff5', '0878282826878', 'Laki-Laki', 'Hadir', '2023-07-21 07:55:49', '2023-07-21 07:55:49', NULL),
+('64b1b5c5-e285-4c52-9294-e746af73e6f0', '3431e34f-b3e7-4238-99c2-2ea387bb644c', '0878282826876', 'Perempuan', 'Hadir', '2023-07-26 20:55:00', '2023-07-26 20:55:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -162,36 +163,37 @@ CREATE TABLE `menu` (
   `harga` double(8,2) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `menu`
 --
 
-INSERT INTO `menu` (`id`, `kd_menu`, `nama`, `jenis`, `komposisi`, `deskripsi`, `foto`, `foto_url`, `harga`, `deleted_at`, `created_at`, `updated_at`) VALUES
-('006536d4-aaa5-4e68-8dc9-5587c065b71a', 'N5', 'Greentea', 'Minuman', 'bubuk greentea, gula batu', 'teh yang dibuat dari daun tanaman teh (Camellia sinensis) yang dipetik dan mengalami proses pemanasan untuk mencegah oksidasi, atau bisa juga berarti minuman yang dihasilkan dari menyeduh daun teh tersebut.', 'Greentea-1690126868.jpg', 'http://127.0.0.1:8000/foto/Greentea-1690126868.jpg', 22000.00, NULL, '2023-07-23 08:41:08', '2023-07-23 08:41:08'),
-('02d8720f-ed74-4e0a-9520-357536c146f3', 'M5', 'Ikan Nila Goreng', 'Makanan', 'Ikan Nila, Jeruk Nipis, kemiri, Kunyit, Garam, Bawang Putih', 'Ikan nila yang digoreng hingga matang dan menghasilkan rasa yang lezat', 'Ikan Nila Goreng-1690127729.jpg', 'http://127.0.0.1:8000/foto/Ikan Nila Goreng-1690127729.jpg', 55000.00, NULL, '2023-07-23 08:55:29', '2023-07-23 08:55:29'),
-('36caee59-9651-4b99-b5dc-402379471932', 'M4', 'Sate Udang', 'Makanan', 'udang', 'olahan udang yang ditusuk menjadi sate lezat dan bergizi', 'Sate Udang-1690127630.jpg', 'http://127.0.0.1:8000/foto/Sate Udang-1690127630.jpg', 27000.00, NULL, '2023-07-23 08:53:50', '2023-07-23 08:53:50'),
-('4abfad53-9a0f-4bdb-ac6b-8ebce6b3d3bd', 'N2', 'Jus Strawberry', 'Minuman', 'buah strawberry, es batu', 'Jus dengan buah strawberry yang segar', 'Jus Strawberry-1690104437.jpg', 'http://127.0.0.1:8000/foto/Jus Strawberry-1690104437.jpg', 22000.00, NULL, '2023-07-23 02:27:17', '2023-07-23 02:27:17'),
-('4cc84b2f-4d06-4039-9a28-fa817eb67f38', 'M10', 'Sop Iga', 'Makanan', 'iga sapi, wortel, kentang, bawang bombay, cengkeh dll', 'Sop iga sapi adalah makanan berkuah yang cocok disantap dalam suasana apapun, terutama ketika musim hujan atau dingin.', 'Sop Iga-1690128271.jpg', 'http://127.0.0.1:8000/foto/Sop Iga-1690128271.jpg', 55000.00, NULL, '2023-07-23 09:04:32', '2023-07-23 09:04:32'),
-('5850a585-f282-476c-a1dc-3f74651d49c6', 'N10', 'Caramel Latte', 'Minuman', 'Kopi, Susu, Es Batu, Karamel', 'jenis minuman kopi yang mengandung espresso, susu, dan saus karamel.', 'Caramel Latte-1690127471.jpg', 'http://127.0.0.1:8000/foto/Caramel Latte-1690127471.jpg', 27000.00, NULL, '2023-07-23 08:51:11', '2023-07-23 08:51:11'),
-('71057723-b9e2-4e78-8382-a6ccf8a0d31a', 'M8', 'Gepuk', 'Makanan', 'gepuk', 'Olahan daging sapi yang dibuat menjadi gepeng sehingga menghasilkan daging yang empuk dan lezat', 'Gepuk-1690128034.jpg', 'http://127.0.0.1:8000/foto/Gepuk-1690128034.jpg', 28000.00, NULL, '2023-07-23 09:00:34', '2023-07-23 09:00:34'),
-('770f023c-db52-4df3-a68a-dcfcf330a1a1', 'M1', 'Ayam Kremes', 'Makanan', 'ayam, tepung sagu, tepung beras, santan', 'ayam ayaman ajah', 'Ayam Kremes-1690104292.jpg', 'http://127.0.0.1:8000/foto/Ayam Kremes-1690104292.jpg', 37000.00, NULL, '2023-07-23 02:24:52', '2023-07-23 02:24:52'),
-('837df9bc-2d30-45f5-b360-bc818c04d0f4', 'N7', 'Jus Alpukat', 'Minuman', 'Buah alpukat, susu, gula, es batu', 'Jus alpukat adalah minuman yang terbuat dari buah alpukat yang diblender bersama dengan susu atau air dan gula (atau bahan pemanis lainnya).', 'Jus Alpukat-1690127163.jpg', 'http://127.0.0.1:8000/foto/Jus Alpukat-1690127163.jpg', 22000.00, NULL, '2023-07-23 08:46:03', '2023-07-23 08:46:03'),
-('8e822266-9148-412a-9b19-90c93f09eebd', 'N8', 'Jus Mangga', 'Minuman', 'Buah mangga, susu, gula, es batu', 'Jus mangga adalah minuman yang terbuat dari buah mangga yang diblender bersama dengan susu atau air dan gula (atau bahan pemanis lainnya).', 'Jus Mangga-1690127257.jpg', 'http://127.0.0.1:8000/foto/Jus Mangga-1690127257.jpg', 22000.00, NULL, '2023-07-23 08:47:37', '2023-07-23 08:47:37'),
-('a4b30f90-e327-4113-9fe7-f12ee7cbd8ec', 'M6', 'Ikan Mas Goreng', 'Makanan', 'Ikan Mas, Jeruk Nipis, kemiri, Kunyit, Garam, Bawang Putih', 'Ikan mas yang digoreng hingga matang dan menghasilkan rasa yang lezat dan gurih', 'Ikan Mas Goreng-1690127842.jpg', 'http://127.0.0.1:8000/foto/Ikan Mas Goreng-1690127842.jpg', 55000.00, NULL, '2023-07-23 08:57:22', '2023-07-23 08:57:22'),
-('a89ce8b9-8b7f-4026-a2e4-bc5519d19175', 'N9', 'Jus Melon', 'Minuman', 'Buah Melon, Gula, Es Batu, Susu', 'jus melon adalah minuman yang terbuat dari buah melon yang diblender bersama dengan susu atau air dan gula (atau bahan pemanis lainnya).', 'Jus Melon-1690127370.jpg', 'http://127.0.0.1:8000/foto/Jus Melon-1690127370.jpg', 22000.00, NULL, '2023-07-23 08:49:31', '2023-07-23 08:49:31'),
-('adfbb3a7-005d-4c2c-b262-ac4b7b70e639', 'N3', 'Americano Coffee', 'Minuman', 'bubuk kopi, es batu', 'kopi america yang memiliki cita rasa mewah', 'Americano Coffee-1690126608.jpg', 'http://127.0.0.1:8000/foto/Americano Coffee-1690126608.jpg', 14000.00, NULL, '2023-07-23 08:36:48', '2023-07-23 08:36:48'),
-('c19df0f6-d9c2-47a0-a45b-dbbee7b42d48', 'M9', 'Babat', 'Makanan', 'Babat sapi', 'Olahan daleman sapi yang bernama babat menjadi makanan yang lezat dan bergizi', 'Babat-1690128111.jpg', 'http://127.0.0.1:8000/foto/Babat-1690128111.jpg', 24000.00, NULL, '2023-07-23 09:01:51', '2023-07-23 09:01:51'),
-('c342a742-c95a-4978-b464-38b9e2a33a37', 'N4', 'kopi tubruk', 'Minuman', 'bubuk kopi, gula', 'minuman kopi khas Indonesia yang dibuat dengan menuangkan air panas ke dalam gelas atau teko yang sudah diisi bubuk kopi', 'kopi tubruk-1690126729.jpg', 'http://127.0.0.1:8000/foto/kopi tubruk-1690126729.jpg', 17000.00, NULL, '2023-07-23 08:38:49', '2023-07-23 08:38:49'),
-('c7f996d7-346c-44ae-8916-66806564c86f', 'AG1', 'Ayam Goreng', 'Makanan', 'rica rica', 'abc', 'Ayam Goreng-1689951154.jpg', 'http://localhost:8000/foto/Ayam Goreng-1689951154.jpg', 15000.00, '2023-07-23 02:21:39', '2023-07-21 07:52:34', '2023-07-23 02:21:39'),
-('c8d37bc8-7cda-4227-bbf2-b36e4ddd0017', 'M2', 'Bebek Kremes', 'Makanan', 'Bebek, Tepung Sagu, Tepung Beras, Santan', 'Bebek lezat mantap', 'Bebek Kremes-1690104334.jpg', 'http://127.0.0.1:8000/foto/Bebek Kremes-1690104334.jpg', 37000.00, NULL, '2023-07-23 02:25:34', '2023-07-23 02:25:34'),
-('cb18ff88-4880-4c73-9bcc-adff90b298bc', 'N6', 'Chocolate', 'Minuman', 'Bubuk coklat, gula', 'Cokelat panas adalah minuman panas yang dibuat dari cokelat atau kakao bubuk dan gula, dengan air atau susu hangat.', 'Chocolate-1690127043.jpg', 'http://127.0.0.1:8000/foto/Chocolate-1690127043.jpg', 20000.00, NULL, '2023-07-23 08:44:03', '2023-07-23 08:44:03'),
-('d61d6af6-415e-40e8-ae16-9d97781fe091', 'M2', 'Ayam Kremes', 'Makanan', 'ayam, tepung sagu, tepung beras, santan', 'Ayam Ayaman', 'Ayam Kremes-1690104139.jpg', 'http://127.0.0.1:8000/foto/Ayam Kremes-1690104139.jpg', 24000.00, '2023-07-23 02:22:30', '2023-07-23 02:22:19', '2023-07-23 02:22:30'),
-('dc3b59bf-661b-49a7-ac1d-f7ff2dadea05', 'M7', 'Paru', 'Makanan', 'paru sapi', 'Paru sapi yang diolah menjadi tusukan sate yang lezat dan bergizi', 'Paru-1690127947.jpg', 'http://127.0.0.1:8000/foto/Paru-1690127947.jpg', 22000.00, NULL, '2023-07-23 08:59:07', '2023-07-23 08:59:07'),
-('f4e3ae0d-235a-4e7e-8139-a2e58a84096e', 'N1', 'Kopi Susu Gula Aren', 'Minuman', 'Es Batu, Susu, Gula Aren, Kopi dll', 'Kopi-kopian', 'Kopi Susu Gula Aren-1690104246.jpg', 'http://127.0.0.1:8000/foto/Kopi Susu Gula Aren-1690104246.jpg', 14000.00, NULL, '2023-07-23 02:24:06', '2023-07-23 02:24:06'),
-('f6a88ddd-8e19-4568-88af-0097b429e68d', 'M3', 'Gurame Asam Manis', 'Makanan', 'Bawang Bombay, Bawang Putih, Cabe Merah dll', 'Ikan asam manis lezat', 'Gurame Asam Manis-1690104385.jpg', 'http://127.0.0.1:8000/foto/Gurame Asam Manis-1690104385.jpg', 55000.00, NULL, '2023-07-23 02:26:25', '2023-07-23 02:26:25');
+INSERT INTO `menu` (`id`, `kd_menu`, `nama`, `jenis`, `komposisi`, `deskripsi`, `foto`, `foto_url`, `harga`, `deleted_at`, `created_at`, `updated_at`, `status`) VALUES
+('006536d4-aaa5-4e68-8dc9-5587c065b71a', 'N5', 'Greentea', 'Minuman', 'bubuk greentea, gula batu', 'teh yang dibuat dari daun tanaman teh (Camellia sinensis) yang dipetik dan mengalami proses pemanasan untuk mencegah oksidasi, atau bisa juga berarti minuman yang dihasilkan dari menyeduh daun teh tersebut.', 'Greentea-1690126868.jpg', 'http://127.0.0.1:8000/foto/Greentea-1690126868.jpg', 22000.00, NULL, '2023-07-23 08:41:08', '2023-07-23 08:41:08', ''),
+('02d8720f-ed74-4e0a-9520-357536c146f3', 'M5', 'Ikan Nila Goreng', 'Makanan', 'Ikan Nila, Jeruk Nipis, kemiri, Kunyit, Garam, Bawang Putih', 'Ikan nila yang digoreng hingga matang dan menghasilkan rasa yang lezat', 'Ikan Nila Goreng-1690127729.jpg', 'http://127.0.0.1:8000/foto/Ikan Nila Goreng-1690127729.jpg', 55000.00, NULL, '2023-07-23 08:55:29', '2023-07-23 08:55:29', ''),
+('36caee59-9651-4b99-b5dc-402379471932', 'M4', 'Sate Udang', 'Makanan', 'udang', 'olahan udang yang ditusuk menjadi sate lezat dan bergizi', 'Sate Udang-1690127630.jpg', 'http://127.0.0.1:8000/foto/Sate Udang-1690127630.jpg', 27000.00, NULL, '2023-07-23 08:53:50', '2023-07-23 08:53:50', ''),
+('4abfad53-9a0f-4bdb-ac6b-8ebce6b3d3bd', 'N2', 'Jus Strawberry', 'Minuman', 'buah strawberry, es batu', 'Jus dengan buah strawberry yang segar', 'Jus Strawberry-1690104437.jpg', 'http://127.0.0.1:8000/foto/Jus Strawberry-1690104437.jpg', 22000.00, NULL, '2023-07-23 02:27:17', '2023-07-23 02:27:17', ''),
+('4cc84b2f-4d06-4039-9a28-fa817eb67f38', 'M10', 'Sop Iga', 'Makanan', 'iga sapi, wortel, kentang, bawang bombay, cengkeh dll', 'Sop iga sapi adalah makanan berkuah yang cocok disantap dalam suasana apapun, terutama ketika musim hujan atau dingin.', 'Sop Iga-1690128271.jpg', 'http://127.0.0.1:8000/foto/Sop Iga-1690128271.jpg', 55000.00, NULL, '2023-07-23 09:04:32', '2023-07-23 09:04:32', ''),
+('5850a585-f282-476c-a1dc-3f74651d49c6', 'N10', 'Caramel Latte', 'Minuman', 'Kopi, Susu, Es Batu, Karamel', 'jenis minuman kopi yang mengandung espresso, susu, dan saus karamel.', 'Caramel Latte-1690127471.jpg', 'http://127.0.0.1:8000/foto/Caramel Latte-1690127471.jpg', 27000.00, NULL, '2023-07-23 08:51:11', '2023-07-23 08:51:11', ''),
+('71057723-b9e2-4e78-8382-a6ccf8a0d31a', 'M8', 'Gepuk', 'Makanan', 'gepuk', 'Olahan daging sapi yang dibuat menjadi gepeng sehingga menghasilkan daging yang empuk dan lezat', 'Gepuk-1690128034.jpg', 'http://127.0.0.1:8000/foto/Gepuk-1690128034.jpg', 28000.00, NULL, '2023-07-23 09:00:34', '2023-07-23 09:00:34', ''),
+('770f023c-db52-4df3-a68a-dcfcf330a1a1', 'M1', 'Ayam Kremes', 'Makanan', 'ayam, tepung sagu, tepung beras, santan', 'ayam ayaman ajah', 'Ayam Kremes-1690104292.jpg', 'http://127.0.0.1:8000/foto/Ayam Kremes-1690104292.jpg', 37000.00, NULL, '2023-07-23 02:24:52', '2023-07-23 02:24:52', ''),
+('837df9bc-2d30-45f5-b360-bc818c04d0f4', 'N7', 'Jus Alpukat', 'Minuman', 'Buah alpukat, susu, gula, es batu', 'Jus alpukat adalah minuman yang terbuat dari buah alpukat yang diblender bersama dengan susu atau air dan gula (atau bahan pemanis lainnya).', 'Jus Alpukat-1690127163.jpg', 'http://127.0.0.1:8000/foto/Jus Alpukat-1690127163.jpg', 22000.00, NULL, '2023-07-23 08:46:03', '2023-07-23 08:46:03', ''),
+('8e822266-9148-412a-9b19-90c93f09eebd', 'N8', 'Jus Mangga', 'Minuman', 'Buah mangga, susu, gula, es batu', 'Jus mangga adalah minuman yang terbuat dari buah mangga yang diblender bersama dengan susu atau air dan gula (atau bahan pemanis lainnya).', 'Jus Mangga-1690127257.jpg', 'http://127.0.0.1:8000/foto/Jus Mangga-1690127257.jpg', 22000.00, NULL, '2023-07-23 08:47:37', '2023-07-23 08:47:37', ''),
+('a4b30f90-e327-4113-9fe7-f12ee7cbd8ec', 'M6', 'Ikan Mas Goreng', 'Makanan', 'Ikan Mas, Jeruk Nipis, kemiri, Kunyit, Garam, Bawang Putih', 'Ikan mas yang digoreng hingga matang dan menghasilkan rasa yang lezat dan gurih', 'Ikan Mas Goreng-1690127842.jpg', 'http://127.0.0.1:8000/foto/Ikan Mas Goreng-1690127842.jpg', 55000.00, NULL, '2023-07-23 08:57:22', '2023-07-23 08:57:22', ''),
+('a89ce8b9-8b7f-4026-a2e4-bc5519d19175', 'N9', 'Jus Melon', 'Minuman', 'Buah Melon, Gula, Es Batu, Susu', 'jus melon adalah minuman yang terbuat dari buah melon yang diblender bersama dengan susu atau air dan gula (atau bahan pemanis lainnya).', 'Jus Melon-1690127370.jpg', 'http://127.0.0.1:8000/foto/Jus Melon-1690127370.jpg', 22000.00, NULL, '2023-07-23 08:49:31', '2023-07-23 08:49:31', ''),
+('adfbb3a7-005d-4c2c-b262-ac4b7b70e639', 'N3', 'Americano Coffee', 'Minuman', 'bubuk kopi, es batu', 'kopi america yang memiliki cita rasa mewah', 'Americano Coffee-1690126608.jpg', 'http://localhost:8000/foto/Americano Coffee-1690126608.jpg', 14000.00, NULL, '2023-07-23 08:36:48', '2023-07-30 00:41:53', 'Habis'),
+('c19df0f6-d9c2-47a0-a45b-dbbee7b42d48', 'M9', 'Babat', 'Makanan', 'Babat sapi', 'Olahan daleman sapi yang bernama babat menjadi makanan yang lezat dan bergizi', 'Babat-1690128111.jpg', 'http://127.0.0.1:8000/foto/Babat-1690128111.jpg', 24000.00, NULL, '2023-07-23 09:01:51', '2023-07-23 09:01:51', ''),
+('c342a742-c95a-4978-b464-38b9e2a33a37', 'N4', 'kopi tubruk', 'Minuman', 'bubuk kopi, gula', 'minuman kopi khas Indonesia yang dibuat dengan menuangkan air panas ke dalam gelas atau teko yang sudah diisi bubuk kopi', 'kopi tubruk-1690126729.jpg', 'http://127.0.0.1:8000/foto/kopi tubruk-1690126729.jpg', 17000.00, NULL, '2023-07-23 08:38:49', '2023-07-23 08:38:49', ''),
+('c7f996d7-346c-44ae-8916-66806564c86f', 'AG1', 'Ayam Goreng', 'Makanan', 'rica rica', 'abc', 'Ayam Goreng-1689951154.jpg', 'http://localhost:8000/foto/Ayam Goreng-1689951154.jpg', 15000.00, '2023-07-23 02:21:39', '2023-07-21 07:52:34', '2023-07-23 02:21:39', ''),
+('c8d37bc8-7cda-4227-bbf2-b36e4ddd0017', 'M2', 'Bebek Kremes', 'Makanan', 'Bebek, Tepung Sagu, Tepung Beras, Santan', 'Bebek lezat mantap', 'Bebek Kremes-1690104334.jpg', 'http://127.0.0.1:8000/foto/Bebek Kremes-1690104334.jpg', 37000.00, NULL, '2023-07-23 02:25:34', '2023-07-23 02:25:34', ''),
+('cb18ff88-4880-4c73-9bcc-adff90b298bc', 'N6', 'Chocolate', 'Minuman', 'Bubuk coklat, gula', 'Cokelat panas adalah minuman panas yang dibuat dari cokelat atau kakao bubuk dan gula, dengan air atau susu hangat.', 'Chocolate-1690127043.jpg', 'http://127.0.0.1:8000/foto/Chocolate-1690127043.jpg', 20000.00, NULL, '2023-07-23 08:44:03', '2023-07-23 08:44:03', ''),
+('d61d6af6-415e-40e8-ae16-9d97781fe091', 'M2', 'Ayam Kremes', 'Makanan', 'ayam, tepung sagu, tepung beras, santan', 'Ayam Ayaman', 'Ayam Kremes-1690104139.jpg', 'http://127.0.0.1:8000/foto/Ayam Kremes-1690104139.jpg', 24000.00, '2023-07-23 02:22:30', '2023-07-23 02:22:19', '2023-07-23 02:22:30', ''),
+('dc3b59bf-661b-49a7-ac1d-f7ff2dadea05', 'M7', 'Paru', 'Makanan', 'paru sapi', 'Paru sapi yang diolah menjadi tusukan sate yang lezat dan bergizi', 'Paru-1690127947.jpg', 'http://127.0.0.1:8000/foto/Paru-1690127947.jpg', 22000.00, NULL, '2023-07-23 08:59:07', '2023-07-23 08:59:07', ''),
+('f4e3ae0d-235a-4e7e-8139-a2e58a84096e', 'N1', 'Kopi Susu Gula Aren', 'Minuman', 'Es Batu, Susu, Gula Aren, Kopi dll', 'Kopi-kopian', 'Kopi Susu Gula Aren-1690104246.jpg', 'http://127.0.0.1:8000/foto/Kopi Susu Gula Aren-1690104246.jpg', 14000.00, NULL, '2023-07-23 02:24:06', '2023-07-23 02:24:06', ''),
+('f6a88ddd-8e19-4568-88af-0097b429e68d', 'M3', 'Gurame Asam Manis', 'Makanan', 'Bawang Bombay, Bawang Putih, Cabe Merah dll', 'Ikan asam manis lezat', 'Gurame Asam Manis-1690104385.jpg', 'http://127.0.0.1:8000/foto/Gurame Asam Manis-1690104385.jpg', 55000.00, NULL, '2023-07-23 02:26:25', '2023-07-23 02:26:25', '');
 
 -- --------------------------------------------------------
 
@@ -225,7 +227,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2023_07_20_023007_create_transaksi_detail_table', 1),
 (14, '2023_07_22_151128_addsoftdeletes_in_users_table', 2),
 (16, '2023_07_23_041219_addkodetransaksi_in_transaksi_table', 3),
-(17, '2023_07_24_002539_addrole_in_users_table', 4);
+(17, '2023_07_24_002539_addrole_in_users_table', 4),
+(18, '2023_07_30_072804_addstatus_in_menu_table', 5);
 
 -- --------------------------------------------------------
 
@@ -258,17 +261,15 @@ CREATE TABLE `model_has_roles` (
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', '0987a5a1-2259-405a-ab86-8d1935204f0d'),
 (1, 'App\\Models\\User', '3f606156-a2f4-4164-9b30-59c326070fbf'),
+(2, 'App\\Models\\User', '3431e34f-b3e7-4238-99c2-2ea387bb644c'),
 (2, 'App\\Models\\User', 'a9d73c30-b783-4b00-88cd-cffd95947ff5'),
 (2, 'App\\Models\\User', 'cd2a55da-ba34-49e5-8cda-0865e624e771'),
 (2, 'App\\Models\\User', 'd5062408-f339-4163-ac46-488a08f287b9'),
 (3, 'App\\Models\\User', '5283be95-ab24-4838-b92e-35ffaead2619'),
 (3, 'App\\Models\\User', '53cca6f2-75b0-412b-842a-52999ad3a21c'),
-(3, 'App\\Models\\User', 'bc82da92-4f0b-4d75-bbb5-8cbcfc5e34fa'),
 (4, 'App\\Models\\User', '0987a5a1-2259-405a-ab86-8d1935204f0d'),
 (4, 'App\\Models\\User', '1cc0933b-cf36-4bc3-94f8-7782686533b0'),
 (4, 'App\\Models\\User', '53cca6f2-75b0-412b-842a-52999ad3a21c'),
-(4, 'App\\Models\\User', '9f3f38d3-d367-445e-a996-ab15c9f2261a'),
-(4, 'App\\Models\\User', 'bc82da92-4f0b-4d75-bbb5-8cbcfc5e34fa'),
 (4, 'App\\Models\\User', 'cd2a55da-ba34-49e5-8cda-0865e624e771'),
 (4, 'App\\Models\\User', 'd5062408-f339-4163-ac46-488a08f287b9');
 
@@ -524,9 +525,10 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 ('0987a5a1-2259-405a-ab86-8d1935204f0d', 'Sarah', 'sarah@gmail.com', NULL, '$2y$10$qufP5jmUydl6c3rIPw.k1.RkEHVDJW526VGuUjS6iKr2bJXLDYrXC', NULL, '2023-07-23 03:31:47', '2023-07-23 17:40:06', NULL, 'konsumen'),
 ('1cc0933b-cf36-4bc3-94f8-7782686533b0', 'Danang', 'danang@gmail.com', NULL, '$2y$10$ZE1cmnAjJrs6SI2QRqsfUe9aMhTEk4CgghTjJIbfVjyBEWrE.2GJa', NULL, '2023-07-23 03:14:38', '2023-07-23 17:37:47', NULL, 'konsumen'),
 ('2150ed68-31d2-4a56-9ad6-05f00f345268', 'tasya', 'tasya@gmail.com', NULL, '$2y$10$LAk/N4tkF2OZPCZZ02ZLmOH.d9Z23o8o9ljwyX77x8mXK9HmZZ9KK', NULL, '2023-07-21 07:50:27', '2023-07-21 07:50:27', NULL, ''),
+('3431e34f-b3e7-4238-99c2-2ea387bb644c', 'juli', 'juli@gmail.com', NULL, '$2y$10$RQ1OOmN6hTH0alfzrNAkleL7P.BbWYND0AD33y57ZDmvkAL8DKO7e', NULL, '2023-07-26 20:54:14', '2023-07-26 20:54:14', NULL, 'bag_dapur'),
 ('3f606156-a2f4-4164-9b30-59c326070fbf', 'kasir', 'kasir@gmail.com', NULL, '$2y$10$OOrHToGig.QKIM3/Rp2G4uQaiEcrfVSgyrksveWgUEKtCJPF3UoDu', NULL, NULL, '2023-07-23 17:39:41', NULL, 'superadmin'),
 ('5283be95-ab24-4838-b92e-35ffaead2619', 'adit', 'pelayan@gmail.com', NULL, '$2y$10$8PaUkaNTz/J5xo6kqQpoU.2z1uBV0Rm/rHf02vQsT.le.ayQhdtk.', NULL, '2023-07-21 07:54:46', '2023-07-23 17:37:33', NULL, 'pelayan'),
-('53cca6f2-75b0-412b-842a-52999ad3a21c', 'Rahmad', 'rahmad@gmail.com', NULL, '$2y$10$LL3wxHeTttM4usGlYOSfleXQgjYoI5OFeM25bd2Wg/S2zQgL691fu', NULL, '2023-07-23 03:12:10', '2023-07-23 17:39:57', NULL, 'konsumen'),
+('53cca6f2-75b0-412b-842a-52999ad3a21c', 'Rahmad', 'rahmad@gmail.com', NULL, '$2y$10$LL3wxHeTttM4usGlYOSfleXQgjYoI5OFeM25bd2Wg/S2zQgL691fu', NULL, '2023-07-23 03:12:10', '2023-07-23 19:19:03', '2023-07-23 19:19:03', 'konsumen'),
 ('9f3f38d3-d367-445e-a996-ab15c9f2261a', 'Surya', 'surya@gmail.com', NULL, '$2y$10$BSIJGnmgQGZZCYR0t37wvexh6D3zCUEah8UoZ1hVXWEALRSXfmX6G', NULL, '2023-07-23 03:17:00', '2023-07-23 17:40:23', NULL, 'konsumen'),
 ('a9d73c30-b783-4b00-88cd-cffd95947ff5', 'glen', 'dapur@gmail.com', NULL, '$2y$10$8DE/UMxiLiRCL04.6f6zxOEjm/5cjjXOybeE5aJthb7I0LwXMa8kK', NULL, '2023-07-21 07:54:23', '2023-07-23 17:39:20', NULL, 'bag_dapur'),
 ('bc82da92-4f0b-4d75-bbb5-8cbcfc5e34fa', 'Siti', 'siti@gmail.com', NULL, '$2y$10$1mIW3lhBt7tjOe.N2ivMkuO1VOmEVpqzM564vTV56WFVtCxblamwm', NULL, '2023-07-23 03:12:37', '2023-07-23 17:40:14', NULL, 'konsumen'),
@@ -677,7 +679,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `permissions`

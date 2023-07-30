@@ -95,6 +95,7 @@ class MenuController extends Controller
                 'harga' => $request->harga,
                 'foto' => $namefile,
                 'foto_url' => urlimage($namefile),
+                'status' =>  $request->status,
             ]);
 
         
@@ -106,6 +107,15 @@ class MenuController extends Controller
     
      else{
         //dd($namefile);
+        $namefile = '';
+        if($request->file('foto')) {
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $namefile = $request->nama . '-' . now()->timestamp . '.' . $extension;
+            $request->file('foto')->move('foto', $namefile);
+        }else{
+            $namefile = $request->fotolabel;
+
+        }
          Menu::updateOrCreate(
              ['id' => $request->id],
              [
@@ -117,6 +127,7 @@ class MenuController extends Controller
                 'harga' => $request->harga,
                 'foto' => $namefile,
                 'foto_url' => urlimage($namefile),
+                'status' =>  $request->status,
              ]
              );
  
