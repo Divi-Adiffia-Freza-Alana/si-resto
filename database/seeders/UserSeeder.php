@@ -39,6 +39,7 @@ class UserSeeder extends Seeder
             'id' => Str::uuid(),
             'name' => "kasir",
             'email' => 'kasir@gmail.com',
+            'role' => 'superadmin',
             'password' => Hash::make('kasir12345'),
         ]);
 

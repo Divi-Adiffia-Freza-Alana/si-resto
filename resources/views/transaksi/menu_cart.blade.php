@@ -52,7 +52,7 @@
                           <p class="card-text">Rp. {{$d->harga}}.</p>
                           <?php
                           if($d->status == "Tersedia" || $d->status == ""){
-                           echo '<a style="display:block;margin: auto;" href="/add-to-cart/{{$d->id}}" class="btn bg-green">Add</a>';
+                           echo '<a style="display:block;margin: auto;" href="/add-to-cart/'.$d->id.'" class="btn bg-green">Add</a>';
                           }
                           else{
                             echo ' <a style="display:block;margin: auto;" href="#" class="btn  bg-red">Stok Habis</a>';
@@ -77,8 +77,8 @@
                           <h5 class="card-title">{{$d->nama}}</h5>
                           <p class="card-text">Rp. {{$d->harga}}.</p>
                           <?php
-                          if($d->status == "Tersedia" || $d->status == ""){
-                           echo '<a style="display:block;margin: auto;" href="/add-to-cart/{{$d->id}}" class="btn bg-green">Add</a>';
+                             if($d->status == "Tersedia" || $d->status == ""){
+                           echo '<a style="display:block;margin: auto;" href="/add-to-cart/'.$d->id.'" class="btn bg-green">Add</a>';
                           }
                           else{
                             echo ' <a style="display:block;margin: auto;" href="#" class="btn  bg-red">Stok Habis</a>';
