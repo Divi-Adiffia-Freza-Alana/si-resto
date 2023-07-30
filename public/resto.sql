@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2023 at 09:44 AM
+-- Generation Time: Jul 30, 2023 at 10:46 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -307,8 +307,8 @@ CREATE TABLE `pelayan` (
 --
 
 INSERT INTO `pelayan` (`id`, `id_user`, `no_hp`, `jk`, `status_kehadiran`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('0834701d-0a0c-46ce-b2b2-292beec38dfa', 'bc82da92-4f0b-4d75-bbb5-8cbcfc5e34fa', '087843214321', 'Perempuan', 'Hadir', '2023-07-23 03:13:12', '2023-07-23 03:13:12', NULL),
-('54f07732-243b-4285-b560-026e809fdec3', '53cca6f2-75b0-412b-842a-52999ad3a21c', '081248569234', 'Laki-Laki', 'Hadir', '2023-07-23 03:13:38', '2023-07-23 03:13:38', NULL),
+('0834701d-0a0c-46ce-b2b2-292beec38dfa', 'bc82da92-4f0b-4d75-bbb5-8cbcfc5e34fa', '087843214321', 'Perempuan', 'Hadir', '2023-07-23 03:13:12', '2023-07-30 01:39:49', '2023-07-30 01:39:49'),
+('54f07732-243b-4285-b560-026e809fdec3', '53cca6f2-75b0-412b-842a-52999ad3a21c', '081248569234', 'Laki-Laki', 'Hadir', '2023-07-23 03:13:38', '2023-07-30 01:39:47', '2023-07-30 01:39:47'),
 ('cbbeea00-4705-48f3-9404-9ad993e7ed01', '5283be95-ab24-4838-b92e-35ffaead2619', '0878282826876', 'Laki-Laki', 'Hadir', '2023-07-21 07:55:04', '2023-07-21 07:55:04', NULL);
 
 -- --------------------------------------------------------
