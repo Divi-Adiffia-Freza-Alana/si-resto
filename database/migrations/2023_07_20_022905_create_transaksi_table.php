@@ -16,9 +16,9 @@ return new class extends Migration
             $table->uuid('id_konsumen')->required();
             $table->foreign('id_konsumen')->references('id')->on('users');
             $table->uuid('id_bag_dapur')->required();
-            $table->foreign('id_bag_dapur')->references('id')->on('bag_dapur');
+            $table->foreign('id_bag_dapur')->references('id')->on('users');
             $table->uuid('id_pelayan')->required();
-            $table->foreign('id_pelayan')->references('id')->on('pelayan');
+            $table->foreign('id_pelayan')->references('id')->on('users');
             $table->uuid('id_meja')->required();
             $table->foreign('id_meja')->references('id')->on('meja');
             $table->date('tgl_transaksi');

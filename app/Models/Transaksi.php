@@ -33,7 +33,7 @@ class Transaksi extends Model
 
     public function bagdapur()
     {
-        return $this->hasOne(Bag_Dapur::Class, 'id', 'id_bag_dapur');
+        return $this->hasOne(Users::Class, 'id', 'id_bag_dapur');
     }
 
     public function meja()
@@ -50,7 +50,7 @@ class Transaksi extends Model
     public function pelayan()
 
     {
-    return $this->hasOne(Pelayan::Class, 'id', 'id_pelayan');
+    return $this->hasOne(Users::Class, 'id', 'id_pelayan');
     }
 
 

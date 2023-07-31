@@ -8,6 +8,7 @@ use App\Models\Menu;
 use App\Models\Meja;
 use App\Models\Bag_Dapur;
 use App\Models\Pelayan;
+use App\Models\Users;
 use App\Models\Transaksi;
 use App\Models\Transaksi_detail;
 use Illuminate\Http\RedirectResponse;
@@ -32,8 +33,7 @@ class TransaksiController extends Controller
         if ($request->ajax()) {
 
             if( auth()->user()->hasRole('konsumen')){
-                $transaksi = Transaksi::with(['menu','bagdapur','meja','pelayan','konsumen'=> function ($query) {
-                    $query->where('id_user', '=', auth()->user()->id);}]);
+                $transaksi = Transaksi::with(['menu','bagdapur','meja','pelayan','konsumen'])->where('id_konsumen', '=', auth()->user()->id);
                 return  DataTables::of($transaksi)
                         ->addIndexColumn()
                      /* ->editColumn('category.nama', function($data){
@@ -49,10 +49,10 @@ class TransaksiController extends Controller
                             return $data->meja->nomor;
                         })
                         ->editColumn('pelayan.nama', function($data){
-                            return $data->pelayan->user->name;
+                            return $data->pelayan->name;
                         })
                         ->editColumn('bagdapur.nama', function($data){
-                            return $data->bagdapur->user->name;
+                            return $data->bagdapur->name;
                         })
                         ->addColumn('detail', function($row){
                             $btn = '<a class="btn bg-blue" href="/transaksi-detail/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-eye"></i> </a>';
@@ -60,7 +60,7 @@ class TransaksiController extends Controller
                      })
                      ->addColumn('statuspesanan', function($data){
                         if($data->status == 1){
-                            $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Silahkan Tunggy</a>';
+                            $btn = '<a class="btn bg-blue" href="/done/'.(isset($data->id)?$data->id:"").'" style="color:#00000;display:inline-block;" >Silahkan Tunggu</a>';
                         }
 
                         else if($data->status == 2){
@@ -128,8 +128,7 @@ class TransaksiController extends Controller
             }
             
             else if( auth()->user()->hasRole('pelayan')){
-                $transaksi = Transaksi::with(['menu','bagdapur','konsumen','meja','pelayan'=> function ($query) {
-                    $query->where('id_user', '=', auth()->user()->id);}]);
+                $transaksi = Transaksi::with(['menu','bagdapur','konsumen','meja','pelayan'])->where('id_pelayan', '=', auth()->user()->id);
                 return  DataTables::of($transaksi)
                         ->addIndexColumn()
                      /* ->editColumn('category.nama', function($data){
@@ -145,16 +144,16 @@ class TransaksiController extends Controller
                             return $data->meja->nomor;
                         })
                         ->editColumn('pelayan.nama', function($data){
-                            if($data->pelayan->user->name == null){
+                            if($data->pelayan == null){
                                 return '';
                             }
-                            return $data->pelayan->user->name;
+                            return $data->pelayan->name;
                         }) 
                         ->editColumn('bagdapur.nama', function($data){
-                            if($data->bagdapur->user->name == null){
+                            if($data->bagdapur == null){
                                 return '';
                             }
-                            return $data->bagdapur->user->name;
+                            return $data->bagdapur->name;
                         })
           
                         ->addColumn('detail', function($row){
@@ -198,8 +197,7 @@ class TransaksiController extends Controller
 
 
                             //var_dump($request->get('filtermonth'));
-                            $instance = Transaksi::with(['menu','bagdapur','konsumen','meja','pelayan'=> function ($query) {
-                                $query->where('id_user', '=', auth()->user()->id);}]);
+                            $instance = Transaksi::with(['menu','bagdapur','konsumen','meja','pelayan'])->where('id_pelayan', '=', auth()->user()->id);
                             //exit();
 
 
@@ -213,8 +211,7 @@ class TransaksiController extends Controller
                               //  $query->where('id_user', '=', auth()->user()->id);}])->whereMonth('tgl_transaksi', $request->get('filtermonth'));
                            //$instance = Transaksi::with(['pelayan'])->get();
                            //$instance[0]->whereMonth('tgl_transaksi', $request->get('filtermonth'))
-                           $instance->with(['menu','bagdapur','konsumen','meja','pelayan'=> function ($query) {
-                            $query->where('id_user', '=', auth()->user()->id);}])->whereMonth('tgl_transaksi', $request->get('filtermonth'));
+                           $instance->with(['menu','bagdapur','konsumen','meja','pelayan'])->where('id_pelayan', '=', auth()->user()->id)->whereMonth('tgl_transaksi', $request->get('filtermonth'));
 
                           // $instance = Transaksi::with(['pelayan'=> function ($query) {
                            // $query->where('id_user', '=', auth()->user()->id);}]);
@@ -233,8 +230,7 @@ class TransaksiController extends Controller
             }
 
             else if( auth()->user()->hasRole('bag_dapur')){
-                $transaksi = Transaksi::with(['menu','pelayan','konsumen','meja','bagdapur'=> function ($query) {
-                    $query->where('id_user', '=', auth()->user()->id);}]);
+                $transaksi = Transaksi::with(['menu','pelayan','konsumen','meja','bagdapur'])->where('id_bag_dapur', '=', auth()->user()->id);
                 return  DataTables::of($transaksi)
                         ->addIndexColumn()
                      /* ->editColumn('category.nama', function($data){
@@ -250,16 +246,16 @@ class TransaksiController extends Controller
                             return $data->meja->nomor;
                         })
                         ->editColumn('pelayan.nama', function($data){
-                            if($data->pelayan->user->name == null){
+                            if($data->pelayan->name == null){
                                 return '';
                             }
-                            return $data->pelayan->user->name;
+                            return $data->pelayan->name;
                         })
                         ->editColumn('bagdapur.nama', function($data){
-                            if($data->bagdapur->user->name == null){
+                            if($data->bagdapur->name == null){
                                 return '';
                             }
-                            return $data->bagdapur->user->name;
+                            return $data->bagdapur->name;
                         })
                         ->addColumn('detail', function($row){
                             $btn = '<a class="btn bg-blue" href="/transaksi-detail/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-eye"></i> </a>';
@@ -302,8 +298,7 @@ class TransaksiController extends Controller
 
 
                             //var_dump($request->get('filtermonth'));
-                            $instance = Transaksi::with(['menu','pelayan','meja','konsumen','bagdapur'=> function ($query) {
-                                $query->where('id_user', '=', auth()->user()->id);}]);
+                            $instance = Transaksi::with(['menu','pelayan','meja','konsumen','bagdapur'])->where('id_bag_dapur', '=', auth()->user()->id);
                             //exit();
 
 
@@ -317,8 +312,7 @@ class TransaksiController extends Controller
                               //  $query->where('id_user', '=', auth()->user()->id);}])->whereMonth('tgl_transaksi', $request->get('filtermonth'));
                            //$instance = Transaksi::with(['pelayan'])->get();
                            //$instance[0]->whereMonth('tgl_transaksi', $request->get('filtermonth'))
-                           $instance->with(['menu','pelayan','konsumen','meja','bagdapur'=> function ($query) {
-                            $query->where('id_user', '=', auth()->user()->id);}])->whereMonth('tgl_transaksi', $request->get('filtermonth'));
+                           $instance->with(['menu','pelayan','konsumen','meja','bagdapur'])->where('id_bag_dapur', '=', auth()->user()->id)->whereMonth('tgl_transaksi', $request->get('filtermonth'));
 
                           // $instance = Transaksi::with(['pelayan'=> function ($query) {
                            // $query->where('id_user', '=', auth()->user()->id);}]);
@@ -357,16 +351,16 @@ class TransaksiController extends Controller
                         return $data->meja->nomor;
                     })
                     ->editColumn('pelayan.nama', function($data){
-                        if($data->pelayan->user->name == null){
+                        if($data->pelayan->name == null){
                             return '';
                         }
-                        return $data->pelayan->user->name;
+                        return $data->pelayan->name;
                     })
                     ->editColumn('bagdapur.nama', function($data){
-                        if($data->bagdapur->user->name == null){
+                        if($data->bagdapur->name == null){
                             return '';
                         }
-                        return $data->bagdapur->user->name;
+                        return $data->bagdapur->name;
                     })
                     ->addColumn('detail', function($row){
                         $btn = '<a class="btn bg-blue" href="/transaksi-detail/'.(isset($row->id)?$row->id:"").'" style="color:#ffff;display:inline-block;" ><i class="fa-solid fa-eye"></i> </a>';
@@ -664,8 +658,12 @@ class TransaksiController extends Controller
         return redirect()->back()->withInput();
     }*/ /*else {*/
         // dd(Carbon::now()->format('d-m-Y'));
-        $bagdapur = Bag_Dapur::select("id")->where('status_kehadiran', '=', "Hadir")->get();
-        $pelayan = Pelayan::select("id")->where('status_kehadiran', '=', "Hadir")->get();
+        $bagdapur = Users::select("id")->whereRelation('bagdapur', 'status_kehadiran', '=', 'Hadir')->get();
+           
+       // $bagdapur = User::select("id")->bagdapur()->where('status_kehadiran', '=', "Hadir")->get();
+        $pelayan = Users::select("id")->whereRelation('pelayan', 'status_kehadiran', '=', 'Hadir')->get();;
+        //var_dump($pelayan[]->id);
+        //exit();
         $transaksi = Transaksi::where('tgl_transaksi', '=', Carbon::now()->format('Y-m-d'))->get();
         $num = count($transaksi)+1;
         $id_transaksi = "TR".Carbon::now()->format('Ymd').$num;

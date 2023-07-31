@@ -55,4 +55,16 @@ class User extends Authenticatable
     public function getKeyType(){
          return 'string';
     }
+    public function pelayan()
+
+    {
+    return $this->belongsTo(Pelayan::Class, 'id', 'id_user');
+    }
+
+    public function bagdapur()
+
+    {
+    return $this->belongsTo(Bag_Dapur::Class, 'id', 'id_user');
+    }
+  
 }

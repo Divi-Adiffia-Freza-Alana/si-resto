@@ -31,4 +31,17 @@ class Users extends Model
     {
         return $this->hasMany(Keeper_foto::Class, 'id_keeper', 'id');
     }*/
+
+    public function pelayan()
+
+    {
+    return $this->belongsTo(Pelayan::Class, 'id', 'id_user');
+    }
+
+    public function bagdapur()
+
+    {
+    return $this->belongsTo(Bag_Dapur::Class, 'id', 'id_user');
+    }
+  
 }
